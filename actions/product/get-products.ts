@@ -15,3 +15,4 @@ export const getAllProducts = async (name?: string) => {
   });
   return products;
 };
+

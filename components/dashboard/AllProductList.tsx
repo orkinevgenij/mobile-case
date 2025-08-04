@@ -1,41 +1,23 @@
 'use client';
 import { removeProduct } from '@/actions/product/delete-product';
-import { useDebounceValue } from '@/hooks/useDebounceValue';
 import { Prisma } from '@prisma/client';
 import { Ban, DollarSign, Palette, Pencil, Trash2 } from 'lucide-react';
-import { useRouter, useSearchParams } from 'next/navigation';
-import queryString from 'query-string';
-import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Button } from '../ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
-import { Input } from '../ui/input';
+import DashboardSearch from './DashboardSearch';
 
 type AllProductListProps = {
   products: Prisma.CaseGetPayload<{ include: { caseVariations: true } }>[];
 };
 
 const AllProductList = ({ products }: AllProductListProps) => {
-  const [search, setSearch] = useState<string>('');
+  console.log('products', products);
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const debounceValue = useDebounceValue<string>(search);
-
-  useEffect(() => {
-    const currentQuery = queryString.parse(searchParams.toString());
-    const url = queryString.stringifyUrl({
-      url: '/dashboard/all-products',
-      query: {
-        ...currentQuery,
-        name: debounceValue || undefined,
-      },
-    });
-    router.replace(url);
-  }, [debounceValue]);
 
   return (
     <div className='flex flex-col gap-2'>
-      <Input placeholder='Пошук товару' onChange={(e) => setSearch(e.target.value)} />
-
+      <DashboardSearch />
       {products.map((product) => (
         <Card
           key={product.id}

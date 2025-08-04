@@ -1,19 +1,20 @@
 'use client';
 import Container from '@/components/layout/Container';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Prisma } from '@prisma/client';
 import { Heart } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-
-type FilterListProps = {
+import { Button } from './ui/button';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from './ui/card';
+type SearchListProps = {
   products: Prisma.CaseVariationGetPayload<{ include: { case: true } }>[];
 };
 
-const FilterList = ({ products }: FilterListProps) => {
+const SearchList = ({ products }: SearchListProps) => {
+  console.log('products', products);
   const router = useRouter();
+
   return (
     <Container>
       <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
@@ -78,4 +79,4 @@ const FilterList = ({ products }: FilterListProps) => {
     </Container>
   );
 };
-export default FilterList;
+export default SearchList;

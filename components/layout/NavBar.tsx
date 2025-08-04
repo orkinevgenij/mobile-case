@@ -4,8 +4,8 @@ import { LogIn, ShoppingBasket, UserRoundPlus } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import CategoryMenu from '../common/CategoryMenu';
-import SearchInput from './SearchInput';
 import UserButton from './UserButton';
+import SearchInput from './UserSearch';
 
 const NavBar = ({ brands, series, models }: TCategoryMenu) => {
   const router = useRouter();

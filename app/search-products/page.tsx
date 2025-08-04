@@ -1,17 +1,10 @@
-import { filteredProduct } from '@/actions/product/filtered-product';
-import FilterList from '@/components/FilterList';
+import { getSearchVariations } from '@/actions/product/get-variations';
+import SearchList from '@/components/SearchList';
 
-const FilterPage = async ({
-  searchParams,
-}: {
-  searchParams: Promise<{ brand: string; series: string; model: string }>;
-}) => {
-  const { brand, series, model } = await searchParams;
-  const products = await filteredProduct({
-    brand: brand,
-    series: series,
-    model: model,
-  });
-  return <FilterList products={products} />;
+const SearchPage = async ({ searchParams }: { searchParams: Promise<{ name: string }> }) => {
+  const { name } = await searchParams;
+  const products = await getSearchVariations(name);
+
+  return <SearchList products={products} />;
 };
-export default FilterPage;
+export default SearchPage;
