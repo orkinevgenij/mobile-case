@@ -1,0 +1,107 @@
+'use client';
+import { removeProduct } from '@/actions/product/delete-product';
+import { useDebounceValue } from '@/hooks/useDebounceValue';
+import { Prisma } from '@prisma/client';
+import { Ban, DollarSign, Palette, Pencil, Trash2 } from 'lucide-react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import queryString from 'query-string';
+import { useEffect, useState } from 'react';
+import { Button } from '../ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
+import { Input } from '../ui/input';
+
+type AllProductListProps = {
+  products: Prisma.CaseGetPayload<{ include: { caseVariations: true } }>[];
+};
+
+const AllProductList = ({ products }: AllProductListProps) => {
+  const [search, setSearch] = useState<string>('');
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const debounceValue = useDebounceValue<string>(search);
+
+  useEffect(() => {
+    const currentQuery = queryString.parse(searchParams.toString());
+    const url = queryString.stringifyUrl({
+      url: '/dashboard/all-products',
+      query: {
+        ...currentQuery,
+        name: debounceValue || undefined,
+      },
+    });
+    router.replace(url);
+  }, [debounceValue]);
+
+  return (
+    <div className='flex flex-col gap-2'>
+      <Input placeholder='Пошук товару' onChange={(e) => setSearch(e.target.value)} />
+
+      {products.map((product) => (
+        <Card
+          key={product.id}
+          className='cursor-pointer transition-shadow hover:shadow-lg hover:shadow-orange-200'
+          onClick={() => router.push(`/dashboard/product-variations/${product.id}`)}
+        >
+          <CardHeader>
+            <CardTitle className='text-xl font-semibold'>{product.name}</CardTitle>
+            <p className='text-sm text-gray-500'>ID: {product.id}</p>
+          </CardHeader>
+          <CardContent className='flex flex-col gap-4'>
+            <CardDescription className='text-sm text-gray-500 line-clamp-2'>
+              {product.description}
+            </CardDescription>
+            <div className='space-y-2'>
+              <p className='font-medium text-gray-700'>Варіації:</p>
+              {product.caseVariations.length === 0 ? (
+                <Ban className='text-red-500' />
+              ) : (
+                product.caseVariations.map((variation) => (
+                  <div
+                    key={variation.id}
+                    className='flex justify-between text-sm border p-2 rounded-md bg-gray-50'
+                  >
+                    <p className='flex items-center gap-1'>
+                      <Palette size={16} />
+                      Колір: {variation.color}
+                    </p>
+                    <p className='flex items-center gap-1'>
+                      <DollarSign size={16} />
+                      Ціна: {variation.price} грн.
+                    </p>
+                  </div>
+                ))
+              )}
+            </div>
+            <div className='flex justify-end gap-2'>
+              <Button
+                size='sm'
+                variant='destructive'
+                className='cursor-pointer hover:bg-red-400'
+                onClick={(e) => {
+                  e.stopPropagation();
+                  removeProduct(product.id);
+                }}
+              >
+                <Trash2 size={16} />
+                Видалити
+              </Button>
+              <Button
+                size='sm'
+                className='cursor-pointer'
+                onClick={(e) => {
+                  e.stopPropagation();
+                  router.push(`/dashboard/edit-product/${product.id}`);
+                }}
+              >
+                <Pencil size={16} />
+                Редагувати
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  );
+};
+
+export default AllProductList;

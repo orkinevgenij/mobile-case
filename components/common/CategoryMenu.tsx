@@ -1,0 +1,83 @@
+'use client';
+
+import { cn } from '@/lib/utils';
+import { TCategoryMenu } from '@/types/types';
+import { MenuIcon } from 'lucide-react';
+import Link from 'next/link';
+import { useState } from 'react';
+import { Button } from '../ui/button';
+
+const CategoryMenu = ({ brands, series }: TCategoryMenu) => {
+  const [brandId, setBrandId] = useState<string | null>();
+
+  const [isOpenCatalog, setIsOpenCatalog] = useState(false);
+
+  const filteredSeries = series.filter((s) => s.brandId === brandId);
+
+  return (
+    <div className='relative inline-block' onMouseLeave={() => setIsOpenCatalog(false)}>
+      <Button
+        className='bg-orange-500 hover:bg-orange-400 text-white text-md flex items-center rounded-md shadow-md'
+        onMouseEnter={() => setIsOpenCatalog(true)}
+      >
+        <MenuIcon className='mr-2' />
+        Каталог
+      </Button>
+      {isOpenCatalog && (
+        <div
+          className={cn(
+            'absolute top-full left-0  max-h-[450px] bg-white border rounded-lg shadow-xl z-30 overflow-hidden flex  text-gray-600',
+            brandId ? 'w-[650px]' : 'w-[180px]',
+          )}
+          onMouseLeave={() => {
+            setIsOpenCatalog(false);
+            setBrandId(null);
+          }}
+        >
+          <div className='w-[180px] border-r bg-gray-50 overflow-y-auto max-h-[450px]'>
+            {brands.map((brand) => (
+              <Link key={brand.id} href={`/series/${brand.id}`}>
+                <button
+                  key={brand.id}
+                  onMouseEnter={() => setBrandId(brand.id)}
+                  className={`w-full text-left px-4 py-2 text-sm hover:bg-orange-100 transition-colors ${
+                    brand.id === brandId ? 'bg-orange-100 font-semibold' : ''
+                  }`}
+                >
+                  {brand.name}
+                </button>
+              </Link>
+            ))}
+          </div>
+
+          {brandId && filteredSeries.length > 0 && (
+            <div className='flex-1 grid grid-cols-2 p-2 overflow-y-auto max-h-[450px]'>
+              {filteredSeries.map((series) => (
+                <div key={series.id}>
+                  <Link
+                    href={`/models/${series.id}`}
+                    key={series.id}
+                    className='text-md font-semibold border-b cursor-pointer hover:text-gray-900'
+                  >
+                    {series.name}
+                  </Link>
+                  <div className='space-y-1'>
+                    {series.modelSmartphone?.map((model) => (
+                      <Link key={model.id} href={`/products/${model.id}`}>
+                        <p className='text-sm  hover:text-orange-600 transition-colors cursor-pointer my-2'>
+                          {model.name}
+                        </p>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default CategoryMenu;
