@@ -62,7 +62,7 @@ const Variations = ({ variations, caseId }: VariationsProps) => {
               </p>
               <p className='flex items-center gap-1'>
                 <DollarSign size={16} color='green' />
-                {variation.price} грн.
+                {variation.price} ₴
               </p>
             </div>
             <CardAction className='flex gap-2 items-end'>

@@ -1,10 +1,11 @@
 'use client';
-
 import { Case, Prisma } from '@prisma/client';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { cn } from '@/lib/utils';
+import { useCartStore } from '@/store/store';
+import { ShoppingBasket } from 'lucide-react';
 import Image from 'next/image';
 import Container from './layout/Container';
 import Table from './TableComponent';
@@ -18,9 +19,12 @@ type DetailsProps = {
 };
 
 const Details = ({ product, variation, colors }: DetailsProps) => {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const activeColor = searchParams.get('color') ?? variation.color;
+  const { cartItems, addToCart } = useCartStore();
 
+  const isProductInCart = cartItems.find((item) => item.id === variation.id);
   return (
     <Container>
       <div className='grid grid-cols-1 gap-8 md:grid-cols-2'>
@@ -36,7 +40,7 @@ const Details = ({ product, variation, colors }: DetailsProps) => {
             <Image src={variation.imgUrl || ''} alt='image' fill />
           </div>
 
-          <p className='text-2xl font-semibold text-rose-600'>{variation.price}&nbsp;грн</p>
+          <p className='text-2xl font-semibold text-rose-600'>{variation.price} ₴</p>
           <p className='text-gray-600'>{variation.case.description}</p>
           <Table variation={variation} />
         </div>
@@ -59,9 +63,29 @@ const Details = ({ product, variation, colors }: DetailsProps) => {
               ))}
             </div>
           </div>
-          <Button size='lg' className='w-full max-w-xs bg-green-600 hover:bg-green-500'>
-            Купити
-          </Button>
+          {isProductInCart ? (
+            <ShoppingBasket
+              className='text-orange-600 cursor-pointer hover:opacity-80'
+              onClick={() => router.push('/cart')}
+            />
+          ) : (
+            <Button
+              size='lg'
+              className='w-full max-w-xs bg-green-600 hover:bg-green-500'
+              onClick={() =>
+                addToCart({
+                  id: variation.id,
+                  name: variation.case.name,
+                  price: variation.price,
+                  imgUrl: variation.imgUrl || '',
+                  color: variation.color,
+                  quantity: 1,
+                })
+              }
+            >
+              Купити
+            </Button>
+          )}
           <Tabs />
         </div>
       </div>

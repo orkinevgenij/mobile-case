@@ -2,6 +2,7 @@
 import Container from '@/components/layout/Container';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { useCartStore } from '@/store/store';
 import { Prisma } from '@prisma/client';
 import { Heart } from 'lucide-react';
 import Image from 'next/image';
@@ -14,6 +15,8 @@ type FilterListProps = {
 
 const FilterList = ({ products }: FilterListProps) => {
   const router = useRouter();
+  const { cartItems, addToCart } = useCartStore();
+
   return (
     <Container>
       <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
@@ -52,15 +55,16 @@ const FilterList = ({ products }: FilterListProps) => {
               <div className='flex w-full flex-col items-center gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100'>
                 <Button
                   className='w-1/2 bg-green-600 hover:bg-green-600/90 cursor-pointer'
-                  // onClick={() =>
-                  //   addToCart({
-                  //     id: product.id,
-                  //     name: product.case.name,
-                  //     price: product.price,
-                  //     imgUrl: product.imgUrl || '',
-                  //     color: product.color,
-                  //   })
-                  // }
+                  onClick={() =>
+                    addToCart({
+                      id: product.id,
+                      name: product.case.name,
+                      price: product.price,
+                      imgUrl: product.imgUrl || '',
+                      color: product.color,
+                      quantity: 1,
+                    })
+                  }
                 >
                   Купити
                 </Button>

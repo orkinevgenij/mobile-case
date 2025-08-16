@@ -2,7 +2,6 @@
 import { useCartStore } from '@/store/store';
 import { Prisma } from '@prisma/client';
 import { Heart, ShoppingBasket } from 'lucide-react';
-import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -15,6 +14,7 @@ type ProductCardProps = {
 const ProductCard = ({ product }: ProductCardProps) => {
   const router = useRouter();
   const { cartItems, addToCart } = useCartStore();
+
   const isProductInCart = cartItems.some((item) => item.id === product.id);
 
   return (
@@ -24,7 +24,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
       </CardHeader>
       <CardContent
         className='flex flex-col items-center gap-2 pt-2 cursor-pointer'
-        onClick={() => router.push(`/product-details/${product.caseId}?color=${product.color}`)}
+        onClick={() => router.push(`/product-details/${product.case.id}?color=${product.color}`)}
       >
         <div className='relative h-[200px] w-[200px]'>
           <Image
@@ -40,7 +40,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
       </CardContent>
 
       <CardFooter className='flex flex-col items-center gap-3 pt-4'>
-        <p className='text-lg font-semibold text-red-500'>{product.price} грн</p>
+        <p className='text-lg font-semibold text-red-500'>{product.price} ₴</p>
         <p className='rounded-md bg-green-500/90 px-1.5 py-0.5 text-xs font-medium text-white'>
           В наявності
         </p>

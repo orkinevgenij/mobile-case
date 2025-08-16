@@ -1,7 +1,8 @@
 'use client';
 import Container from '@/components/layout/Container';
+import { useCartStore } from '@/store/store';
 import { Prisma } from '@prisma/client';
-import { Heart } from 'lucide-react';
+import { Heart, ShoppingBasket } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -12,9 +13,8 @@ type SearchListProps = {
 };
 
 const SearchList = ({ products }: SearchListProps) => {
-  console.log('products', products);
   const router = useRouter();
-
+  const { cartItems, addToCart } = useCartStore();
   return (
     <Container>
       <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
@@ -51,20 +51,29 @@ const SearchList = ({ products }: SearchListProps) => {
                 В наявності
               </p>
               <div className='flex w-full flex-col items-center gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100'>
-                <Button
-                  className='w-1/2 bg-green-600 hover:bg-green-600/90 cursor-pointer'
-                  // onClick={() =>
-                  //   addToCart({
-                  //     id: product.id,
-                  //     name: product.case.name,
-                  //     price: product.price,
-                  //     imgUrl: product.imgUrl || '',
-                  //     color: product.color,
-                  //   })
-                  // }
-                >
-                  Купити
-                </Button>
+                {cartItems.some((item) => item.id === product.id) ? (
+                  <ShoppingBasket
+                    className='text-orange-600 cursor-pointer hover:opacity-80'
+                    onClick={() => router.push('/cart')}
+                  />
+                ) : (
+                  <Button
+                    className='w-1/2 bg-green-600 hover:bg-green-600/90 cursor-pointer'
+                    onClick={() =>
+                      addToCart({
+                        id: product.id,
+                        name: product.case.name,
+                        price: product.price,
+                        imgUrl: product.imgUrl || '',
+                        color: product.color,
+                        quantity: 1,
+                      })
+                    }
+                  >
+                    Купити
+                  </Button>
+                )}
+
                 <Link
                   href='#'
                   className='flex items-center gap-1 text-xs text-slate-500 transition-colors  hover:text-slate-800'

@@ -50,7 +50,7 @@ const PopularProduct = ({ popularProducts }: PopularProductTabsProps) => {
 
             <CardFooter className='flex flex-col items-center gap-3 pt-4'>
               <p className='text-lg font-semibold text-red-500'>
-                {product.caseVariations[0]?.price} грн
+                {product.caseVariations[0]?.price} ₴
               </p>
               <p className='rounded-md bg-green-500/90 px-1.5 py-0.5 text-xs font-medium text-white'>
                 В наявності

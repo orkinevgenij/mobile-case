@@ -18,14 +18,20 @@ const ProductDetails = async ({ params, searchParams }: ProductDetailsProps) => 
   if (!product) return notFound();
 
   const allColors = await prisma.caseVariation.findMany({
-    where: { caseId: id },
+    where: {
+      case: {
+        id,
+      },
+    },
     select: { color: true },
     orderBy: { color: 'asc' },
   });
 
   const activeVariation = await prisma.caseVariation.findFirst({
     where: {
-      caseId: id,
+      case: {
+        id,
+      },
       ...(color ? { color } : {}),
     },
     include: { case: true },

@@ -45,7 +45,7 @@ const Cart = () => {
               </div>
               <div className='flex flex-col flex-1'>
                 <p className=''>{item.name}</p>
-                <p>{item.price} грн</p>
+                <p>{item.price} ₴</p>
               </div>
               <div className='flex items-center gap-2 rounded-sm border-1 border-gray-500 px-4 py-1.5'>
                 <Minus
@@ -55,7 +55,7 @@ const Cart = () => {
                 <span>{item.quantity}</span>
                 <Plus className='cursor-pointer text-black' onClick={() => plusCartItem(item.id)} />
               </div>
-              <p className='font-bold'>{item.price} грн</p>
+              <p className='font-bold'>{item.price} ₴</p>
               <Trash
                 size={30}
                 className='cursor-pointer opacity-70 hover:opacity-100'

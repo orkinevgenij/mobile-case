@@ -1,4 +1,4 @@
-import { getOrders } from '@/actions/order/get-orders';
+import { getOrders } from '@/actions/order/orders';
 import OrderCard from '@/components/common/OrderCard';
 import OrdersEmpty from '@/components/common/OrdersEmpty';
 import Container from '@/components/layout/Container';

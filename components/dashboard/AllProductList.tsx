@@ -48,7 +48,7 @@ const AllProductList = ({ products }: AllProductListProps) => {
                     </p>
                     <p className='flex items-center gap-1'>
                       <DollarSign size={16} />
-                      Ціна: {variation.price} грн.
+                      Ціна: {variation.price} ₴
                     </p>
                   </div>
                 ))
