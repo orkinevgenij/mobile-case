@@ -12,7 +12,6 @@ type AllProductListProps = {
 };
 
 const AllProductList = ({ products }: AllProductListProps) => {
-  console.log('products', products);
   const router = useRouter();
 
   return (

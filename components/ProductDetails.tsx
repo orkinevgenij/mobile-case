@@ -75,6 +75,7 @@ const Details = ({ product, variation, colors }: DetailsProps) => {
               onClick={() =>
                 addToCart({
                   id: variation.id,
+                  caseId: variation.caseId,
                   name: variation.case.name,
                   price: variation.price,
                   imgUrl: variation.imgUrl || '',

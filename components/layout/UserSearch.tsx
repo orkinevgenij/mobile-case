@@ -1,7 +1,7 @@
 'use client';
 
 import { Search } from 'lucide-react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
@@ -9,7 +9,6 @@ import { Input } from '../ui/input';
 const UserSearch = () => {
   const [showInput, setShowInput] = useState(false);
   const searchParams = useSearchParams();
-  const pathname = usePathname();
   const [search, setSearch] = useState(searchParams.get('name') || '');
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLFormElement>(null);

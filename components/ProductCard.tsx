@@ -14,7 +14,6 @@ type ProductCardProps = {
 const ProductCard = ({ product }: ProductCardProps) => {
   const router = useRouter();
   const { cartItems, addToCart } = useCartStore();
-
   const isProductInCart = cartItems.some((item) => item.id === product.id);
 
   return (
@@ -56,6 +55,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
               onClick={() =>
                 addToCart({
                   id: product.id,
+                  caseId: product.caseId,
                   name: product.case.name,
                   price: product.price,
                   imgUrl: product.imgUrl || '',

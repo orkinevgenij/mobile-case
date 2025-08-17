@@ -14,7 +14,7 @@ const HomePage = async () => {
   return (
     <Container>
       <div className='mb-4'>
-        <p className='text-xl font-semibold mb-4'>Знайдіть чохли та стекла для Вашого пристрою</p>
+        <p className='text-xl font-semibold mb-4'>Знайдіть свій чохол</p>
         <FilterForm brands={brands} series={series} models={models} />
       </div>
       <CategoryTabs newProducts={newProducts} popularProducts={popularProducts} />

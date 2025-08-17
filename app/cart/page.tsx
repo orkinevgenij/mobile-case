@@ -13,6 +13,7 @@ import { useRouter } from 'next/navigation';
 const Cart = () => {
   const router = useRouter();
   const { cartItems, removeCartItem, minusCartItem, plusCartItem, clearCartItems } = useCartStore();
+
   const total = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
   const addOrder = async () => {
     try {
@@ -44,7 +45,9 @@ const Cart = () => {
                 <Image src={item.imgUrl || ''} alt={item.name} fill />
               </div>
               <div className='flex flex-col flex-1'>
-                <p className=''>{item.name}</p>
+                <Link href={`/product-details/${item.caseId}?color=${item.color}`}>
+                  {item.name}
+                </Link>
                 <p>{item.price} ₴</p>
               </div>
               <div className='flex items-center gap-2 rounded-sm border-1 border-gray-500 px-4 py-1.5'>

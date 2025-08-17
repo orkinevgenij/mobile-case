@@ -5,7 +5,6 @@ import Container from '@/components/layout/Container';
 
 const OrdersUser = async () => {
   const orders = await getOrders();
-  console.log('orders', orders);
   return (
     <Container>
       <div className='flex flex-col gap-4'>

@@ -66,6 +66,7 @@ const NewProduct = ({ newProducts }: NewProductTabsProps) => {
                     onClick={() =>
                       addToCart({
                         id: product.caseVariations[0].id,
+                        caseId: product.id,
                         name: product.name,
                         price: product.caseVariations[0]?.price || 0,
                         imgUrl: product.caseVariations[0]?.imgUrl || '',

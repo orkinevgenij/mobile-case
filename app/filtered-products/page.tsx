@@ -1,5 +1,6 @@
 import { filteredProduct } from '@/actions/product/filtered-product';
-import FilterList from '@/components/FilterList';
+import Container from '@/components/layout/Container';
+import ProductCard from '@/components/ProductCard';
 
 const FilteredPage = async ({
   searchParams,
@@ -12,6 +13,14 @@ const FilteredPage = async ({
     series: series,
     model: model,
   });
-  return <FilterList products={products} />;
+  return (
+    <Container>
+      <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
+        {products.map((product) => (
+          <ProductCard product={product} />
+        ))}
+      </div>
+    </Container>
+  );
 };
 export default FilteredPage;
