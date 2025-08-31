@@ -3,7 +3,7 @@ import OrderCard from '@/components/common/OrderCard';
 import OrdersEmpty from '@/components/common/OrdersEmpty';
 import Container from '@/components/layout/Container';
 
-const OrdersUser = async () => {
+export default async function OrdersUser() {
   const orders = await getOrders();
   return (
     <Container>
@@ -17,4 +17,3 @@ const OrdersUser = async () => {
     </Container>
   );
 };
-export default OrdersUser;

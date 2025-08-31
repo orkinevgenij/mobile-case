@@ -28,7 +28,10 @@ export const getOrders = async (filter?: 'asc' | 'desc') => {
   return orders;
 };
 export const updateStatusOrder = async (id: string, status: string) => {
-  await prisma.order.update({
+  if (!id) {
+    throw new Error('Order id is required');
+  }
+  const order = await prisma.order.update({
     where: {
       id,
     },
@@ -36,11 +39,25 @@ export const updateStatusOrder = async (id: string, status: string) => {
       status: status as OrderStatus,
     },
   });
+  if (order) {
+    return {
+      success: true,
+    };
+  } else {
+    return { success: false };
+  }
 };
 export const removeOrder = async (id: string) => {
-  await prisma.order.delete({
+  if (!id) {
+    throw new Error('Order id is required');
+  }
+  const order = await prisma.order.delete({
     where: {
       id,
     },
   });
+  if (order) {
+    return { success: true };
+  }
+  return { success: false };
 };

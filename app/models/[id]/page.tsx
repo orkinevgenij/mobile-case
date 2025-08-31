@@ -2,15 +2,14 @@ import Container from '@/components/layout/Container';
 import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
 
-const Models = async ({
+export default async function Models({
   params,
 }: {
   params: Promise<{
     id: string;
   }>;
-}) => {
+}) {
   const { id } = await params;
-
   const models = await prisma.model.findMany({ where: { seriesId: id } });
   if (models.length === 0) return <p>Модель не знайдено</p>;
   return (
@@ -29,4 +28,3 @@ const Models = async ({
     </Container>
   );
 };
-export default Models;

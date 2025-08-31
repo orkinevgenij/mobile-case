@@ -4,7 +4,6 @@ import { Prisma } from '@prisma/client';
 import { DollarSign, Palette, Plus, Trash2 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { Button } from '../ui/button';
 import { Card, CardAction, CardContent, CardDescription, CardTitle } from '../ui/card';
 
@@ -12,9 +11,7 @@ type VariationsProps = {
   variations: Prisma.CaseVariationGetPayload<{ include: { case: true } }>[];
   caseId: string;
 };
-
 const Variations = ({ variations, caseId }: VariationsProps) => {
-  const router = useRouter();
   const removeVariation = async (variationId: string) => {
     await deleteVariation(variationId);
   };

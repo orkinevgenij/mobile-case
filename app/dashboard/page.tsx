@@ -2,7 +2,7 @@ import Container from '@/components/layout/Container';
 import { Plus, Smartphone } from 'lucide-react';
 import Link from 'next/link';
 
-const DashboardPage = () => {
+export default async function DashboardPage() {
   return (
     <Container>
       <div className='grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10'>
@@ -42,4 +42,3 @@ const DashboardPage = () => {
   );
 };
 
-export default DashboardPage;

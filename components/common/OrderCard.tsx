@@ -18,6 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../ui/select';
+import { toast } from 'react-toastify';
 const statuses = [
   {
     status: 'PROCESSING',
@@ -55,15 +56,29 @@ type OrderCardProps = {
 const OrderCard = ({ orders }: OrderCardProps) => {
   const session = useSession();
   const router = useRouter();
+
   const changeUpdate = async (id: string, status: string) => {
-    await updateStatusOrder(id, status);
-    router.refresh();
+    const order = await updateStatusOrder('dsadas', status);
+    if (order.success) {
+      toast.success('Замовлення оновлено');
+      router.refresh();
+    }
+    if (!order.success) {
+      toast.error('Помилка під час оновлення замовлення');
+    }
   };
+
   const handleDeleteOrder = async (id: string) => {
     const isConfirmed = confirm('Ви впевнені, що хочете видалити це замовлення?');
     if (!isConfirmed) return;
-    await removeOrder(id);
-    router.refresh();
+    const order = await removeOrder(id);
+    if (order.success) {
+      toast.success('Замовлення видалено');
+      router.refresh();
+    }
+    if (!order.success) {
+      toast.error('Помилка під час оновлення замовлення');
+    }
   };
   return (
     <Card className='p-4 text-gray-700 space-y-4 rounded-sm'>

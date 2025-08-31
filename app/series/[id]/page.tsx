@@ -1,8 +1,9 @@
 import Container from '@/components/layout/Container';
 import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
-const Series = async ({ params }: { params: Promise<{ id: string }> }) => {
+export default async function Series({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const series = await prisma.series.findMany({
     where: {
@@ -12,8 +13,9 @@ const Series = async ({ params }: { params: Promise<{ id: string }> }) => {
       brand: true,
     },
   });
+
   if (series.length === 0) {
-    return <div className='text-center text-red-500'>Серію не знайдено</div>;
+    return notFound()
   }
   return (
     <Container>
@@ -34,4 +36,3 @@ const Series = async ({ params }: { params: Promise<{ id: string }> }) => {
     </Container>
   );
 };
-export default Series;

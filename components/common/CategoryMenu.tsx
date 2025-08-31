@@ -1,4 +1,3 @@
-'use client';
 
 import { cn } from '@/lib/utils';
 import { TCategoryMenu } from '@/types/types';
@@ -9,9 +8,7 @@ import { Button } from '../ui/button';
 
 const CategoryMenu = ({ brands, series }: TCategoryMenu) => {
   const [brandId, setBrandId] = useState<string | null>();
-
   const [isOpenCatalog, setIsOpenCatalog] = useState(false);
-
   const filteredSeries = series.filter((s) => s.brandId === brandId);
 
   return (
@@ -36,17 +33,16 @@ const CategoryMenu = ({ brands, series }: TCategoryMenu) => {
         >
           <div className='w-[180px] border-r bg-gray-50 overflow-y-auto max-h-[450px]'>
             {brands.map((brand) => (
-              <Link key={brand.id} href={`/series/${brand.id}`}>
-                <button
-                  key={brand.id}
-                  onMouseEnter={() => setBrandId(brand.id)}
-                  className={`w-full text-left px-4 py-2 text-sm hover:bg-orange-100 transition-colors ${
-                    brand.id === brandId ? 'bg-orange-100 font-semibold' : ''
+              <button
+                key={brand.id}
+                onMouseEnter={() => setBrandId(brand.id)}
+                className={`w-full text-left px-4 py-2 text-sm hover:bg-orange-100 transition-colors ${brand.id === brandId ? 'bg-orange-100 font-semibold' : ''
                   }`}
-                >
+              >
+                <Link key={brand.id} href={`/series/${brand.id}`}>
                   {brand.name}
-                </button>
-              </Link>
+                </Link>
+              </button>
             ))}
           </div>
 
@@ -63,11 +59,11 @@ const CategoryMenu = ({ brands, series }: TCategoryMenu) => {
                   </Link>
                   <div className='space-y-1'>
                     {series.modelSmartphone?.map((model) => (
-                      <Link key={model.id} href={`/products/${model.id}`}>
-                        <p className='text-sm  hover:text-orange-600 transition-colors cursor-pointer my-2'>
+                      <p key={model.id} className='text-sm  hover:text-orange-600 transition-colors cursor-pointer my-2'>
+                        <Link href={`/products/${model.id}`}>
                           {model.name}
-                        </p>
-                      </Link>
+                        </Link>
+                      </p>
                     ))}
                   </div>
                 </div>

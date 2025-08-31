@@ -6,6 +6,8 @@ import type { Metadata } from 'next';
 import { SessionProvider } from 'next-auth/react';
 import { Poppins } from 'next/font/google';
 import { ToastContainer } from 'react-toastify';
+import NextTopLoader from 'nextjs-toploader';
+
 import 'react-toastify/dist/ReactToastify.css';
 import './globals.css';
 
@@ -37,6 +39,17 @@ export default async function RootLayout({
           <NavBar brands={brands} series={series} models={models} />
           <main className='flex-grow'>{children}</main>
           <Footer />
+          <NextTopLoader
+            color="yellow"
+            initialPosition={0.3}
+            crawlSpeed={200}
+            height={3}
+            crawl={true}
+            showSpinner={false}
+            easing="ease"
+            speed={200}
+            shadow="0 0 10px #29D,0 0 5px #29D"
+          />
           <ToastContainer position='bottom-center' />
         </body>
       </SessionProvider>

@@ -1,6 +1,5 @@
 import Container from '@/components/layout/Container';
 
-const Favorites = () => {
+export default async function Favorites() {
   return <Container>Favorites</Container>;
 };
-export default Favorites;

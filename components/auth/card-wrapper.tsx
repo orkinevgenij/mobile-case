@@ -19,7 +19,6 @@ const CardWrapper = ({
   backButtonLabel,
   backButtonHref,
   title,
-  showSocial,
 }: CardWrapperProps) => {
   return (
     <Card className='w-full md:w-1/2 xl:w-1/2 shadow-md mx-auto'>

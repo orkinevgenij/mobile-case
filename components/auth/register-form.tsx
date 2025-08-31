@@ -79,7 +79,7 @@ const RegisterForm = () => {
               name='name'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Ім'я</FormLabel>
+                  <FormLabel>Ім&apos;я</FormLabel>
                   <FormControl>
                     <Input {...field} placeholder="Ім'я" />
                   </FormControl>

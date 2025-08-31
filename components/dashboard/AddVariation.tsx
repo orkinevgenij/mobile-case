@@ -21,7 +21,7 @@ const VariationAddForm = ({ caseId }: { caseId: string }) => {
   const [isLoading, setIsLoading] = useState(false);
   const imgInputRef = useRef<HTMLInputElement | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [imgUrl, setImgUrl] = useState<string>('');
+  const [imgUrl] = useState<string>('');
   console.log('selectedFile', selectedFile);
   const handleButtonClick = () => {
     imgInputRef.current?.click();
@@ -53,8 +53,10 @@ const VariationAddForm = ({ caseId }: { caseId: string }) => {
         toast.success('Варіація успішно додано');
         router.push(`/dashboard/product-variations/${caseId}`);
       }
-    } catch (error: any) {
-      toast.error(error.message || 'Помилка під час збереження');
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.error(error.message || 'Помилка під час збереження');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -82,7 +84,7 @@ const VariationAddForm = ({ caseId }: { caseId: string }) => {
             <FormField
               control={form.control}
               name='imgUrl'
-              render={({ field }) => (
+              render={({ }) => (
                 <FormItem>
                   <FormControl>
                     <Input

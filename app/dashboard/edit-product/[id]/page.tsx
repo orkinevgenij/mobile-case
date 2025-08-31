@@ -3,7 +3,7 @@ import { getBrands, getModels, getSeries } from '@/actions/smartphones';
 import AddFormProduct from '@/components/dashboard/AddProduct';
 import Container from '@/components/layout/Container';
 
-const EditProduct = async ({ params }: { params: Promise<{ id: string }> }) => {
+export default async function EditProduct({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const brands = await getBrands();
   const series = await getSeries();
@@ -24,4 +24,3 @@ const EditProduct = async ({ params }: { params: Promise<{ id: string }> }) => {
     </Container>
   );
 };
-export default EditProduct;

@@ -4,13 +4,14 @@ import OrderCard from '@/components/common/OrderCard';
 import OrdersEmpty from '@/components/common/OrdersEmpty';
 import Container from '@/components/layout/Container';
 
-const Orders = async ({
+export default async function Orders({
   searchParams,
 }: {
-  searchParams: {
+  searchParams: Promise<{
     filter: 'asc' | 'desc';
-  };
-}) => {
+  }>
+}) {
+
   const { filter } = await searchParams;
   const orders = await getOrders(filter);
 
@@ -29,4 +30,3 @@ const Orders = async ({
     </Container>
   );
 };
-export default Orders;

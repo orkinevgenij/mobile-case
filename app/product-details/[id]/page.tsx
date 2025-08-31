@@ -1,46 +1,45 @@
-import { updateViews } from '@/actions/product/update-count';
-import Details from '@/components/ProductDetails';
-import { prisma } from '@/lib/prisma';
-import { notFound } from 'next/navigation';
+import { updateViews } from "@/actions/product/update-count";
+import NotFound from "./not-found";
+import { prisma } from "@/lib/prisma";
+import Detail from "@/components/ProductDetail";
 
-type ProductDetailsProps = {
+export default async function ProductDetails({ params, searchParams }: {
   params: Promise<{ id: string }>;
   searchParams: Promise<{ color?: string }>;
-};
-
-const ProductDetails = async ({ params, searchParams }: ProductDetailsProps) => {
+}) {
   const { id } = await params;
   const { color } = await searchParams;
 
-  const product = await prisma.case.findUnique({
-    where: { id },
-  });
-  if (!product) return notFound();
+  // Параллельный запуск двух запросов
+  const [product, allColors] = await Promise.all([
+    prisma.case.findUnique({ where: { id } }),
+    prisma.caseVariation.findMany({
+      where: { case: { id } },
+      select: { color: true },
+      orderBy: { color: 'asc' },
+    }),
+  ]);
 
-  const allColors = await prisma.caseVariation.findMany({
-    where: {
-      case: {
-        id,
-      },
-    },
-    select: { color: true },
-    orderBy: { color: 'asc' },
-  });
+  if (!product) return NotFound();
 
-  const activeVariation = await prisma.caseVariation.findFirst({
+  const activeVariationPromise = prisma.caseVariation.findFirst({
     where: {
-      case: {
-        id,
-      },
+      case: { id },
       ...(color ? { color } : {}),
     },
     include: { case: true },
   });
-  if (!activeVariation) return notFound();
-  await updateViews(id);
-  return (
-    <Details product={product} colors={allColors.map((c) => c.color)} variation={activeVariation} />
-  );
-};
 
-export default ProductDetails;
+  const updateViewsPromise = updateViews(id);
+
+  const [activeVariation] = await Promise.all([activeVariationPromise, updateViewsPromise]);
+
+  if (!activeVariation) return NotFound();
+  return (
+    <Detail
+      product={product}
+      colors={allColors.map((c) => c.color)}
+      variation={activeVariation}
+    />
+  );
+}

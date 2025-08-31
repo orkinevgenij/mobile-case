@@ -18,9 +18,8 @@ const Tabs = () => {
         {tabs.map((tab, idx) => (
           <p
             key={idx}
-            className={`cursor-pointer text-md font-bold ${
-              index === idx ? `text-blue-400 ` : ` text-neutral-800`
-            }`}
+            className={`cursor-pointer text-md font-bold ${index === idx ? `text-blue-400 ` : ` text-neutral-800`
+              }`}
             onClick={() => setIndex(idx)}
           >
             {tab.name}
@@ -44,7 +43,7 @@ const Tabs = () => {
       )}
       {index === 1 && (
         <div className='text-neutral-500'>
-          <p> - Оплата готівкою в магазині/кур'єру</p>
+          <p> - Оплата готівкою в магазині/кур&apos;єру</p>
           <p> - Оплата на картку ПриватБанку</p>
           <p> - Онлайн-оплата LiqPay</p>
         </div>

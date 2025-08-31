@@ -10,7 +10,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-const Cart = () => {
+export default function Cart() {
   const router = useRouter();
   const { cartItems, removeCartItem, minusCartItem, plusCartItem, clearCartItems } = useCartStore();
 
@@ -91,4 +91,3 @@ const Cart = () => {
     </Container>
   );
 };
-export default Cart;

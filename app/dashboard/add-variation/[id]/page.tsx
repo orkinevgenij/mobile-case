@@ -1,7 +1,7 @@
 import VariationAddForm from '@/components/dashboard/AddVariation';
 import Container from '@/components/layout/Container';
 
-const AddVariation = async ({ params }: { params: Promise<{ id: string }> }) => {
+export default async function AddVariation({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   return (
     <Container>
@@ -9,4 +9,3 @@ const AddVariation = async ({ params }: { params: Promise<{ id: string }> }) => 
     </Container>
   );
 };
-export default AddVariation;

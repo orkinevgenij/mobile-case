@@ -12,6 +12,7 @@ type NewProductTabsProps = {
   newProducts: Prisma.CaseGetPayload<{ include: { caseVariations: true } }>[];
 };
 const NewProduct = ({ newProducts }: NewProductTabsProps) => {
+
   const router = useRouter();
   const { cartItems, addToCart } = useCartStore();
 

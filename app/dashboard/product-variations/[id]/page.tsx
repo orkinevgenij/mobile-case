@@ -2,7 +2,7 @@ import { getVariationsByProductId } from '@/actions/product/get-variations';
 import Variations from '@/components/dashboard/Variations';
 import Container from '@/components/layout/Container';
 
-const ProductVariations = async ({ params }: { params: Promise<{ id: string }> }) => {
+export default async function ProductVariations({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const variations = await getVariationsByProductId(id);
 
@@ -12,4 +12,3 @@ const ProductVariations = async ({ params }: { params: Promise<{ id: string }> }
     </Container>
   );
 };
-export default ProductVariations;

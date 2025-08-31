@@ -18,7 +18,7 @@ type DetailsProps = {
   colors: string[];
 };
 
-const Details = ({ product, variation, colors }: DetailsProps) => {
+const Detail = ({ product, variation, colors }: DetailsProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const activeColor = searchParams.get('color') ?? variation.color;
@@ -94,4 +94,4 @@ const Details = ({ product, variation, colors }: DetailsProps) => {
   );
 };
 
-export default Details;
+export default Detail;
