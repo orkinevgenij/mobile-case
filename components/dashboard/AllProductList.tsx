@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation';
 import { Button } from '../ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import DashboardSearch from './DashboardSearch';
-import { use } from 'react'
 type AllProductListProps = {
   products: Prisma.CaseGetPayload<{ include: { caseVariations: true } }>[];
 };
