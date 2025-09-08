@@ -1,6 +1,6 @@
 'use client';
 import { TCategoryMenu } from '@/types/types';
-import { LogIn, ShoppingBasket, UserRoundPlus } from 'lucide-react';
+import { LogIn, ShoppingBasket } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import CategoryMenu from '../common/CategoryMenu';
