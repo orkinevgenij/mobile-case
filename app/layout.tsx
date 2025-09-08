@@ -1,6 +1,5 @@
 import { getBrands, getModels, getSeries } from '@/actions/smartphones';
 import { auth } from '@/auth';
-import Footer from '@/components/layout/Footer';
 import NavBar from '@/components/layout/NavBar';
 import type { Metadata } from 'next';
 import { SessionProvider } from 'next-auth/react';

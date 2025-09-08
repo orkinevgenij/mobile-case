@@ -26,22 +26,14 @@ const NavBar = ({ brands, series, models }: TCategoryMenu) => {
         <div className='flex items-center gap-2 text-white text-xs'>
           <SearchInput />
           {!isLoggedIn && (
-            <>
-              <div
-                className='flex flex-col items-center cursor-pointer'
-                onClick={() => router.push('/auth/login')}
-              >
-                <LogIn size={25} />
-                Увійти
-              </div>
-              <div
-                className='flex flex-col items-center cursor-pointer'
-                onClick={() => router.push('/auth/register')}
-              >
-                <UserRoundPlus size={25} />
-                Реєстрація
-              </div>
-            </>
+            <div
+              className='flex flex-col items-center cursor-pointer'
+              onClick={() => router.push('/auth/login')}
+            >
+              <LogIn size={25} />
+              Увійти
+            </div>
+
           )}
           {isLoggedIn && <UserButton />}
           <div
