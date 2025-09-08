@@ -38,7 +38,6 @@ export default async function RootLayout({
         <body className={`${poppins.variable}  antialiased flex flex-col min-h-screen `}>
           <NavBar brands={brands} series={series} models={models} />
           <main className='flex-grow'>{children}</main>
-          <Footer />
           <NextTopLoader
             color="yellow"
             initialPosition={0.3}

@@ -3,10 +3,7 @@ import { signIn } from 'next-auth/react';
 
 export async function googleAuthenticate() {
   try {
-    await signIn('google', {
-      prompt: 'select_account',
-      callbackUrl: '/',
-    });
+    await signIn('google');
   } catch (error) {
     if (error) {
       if (error instanceof AuthError) {

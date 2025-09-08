@@ -18,7 +18,7 @@ const CategoryMenu = ({ brands, series }: TCategoryMenu) => {
         onMouseEnter={() => setIsOpenCatalog(true)}
       >
         <MenuIcon className='mr-2' />
-        Каталог
+        <p className='hidden md:block xl:block'>Каталог</p>
       </Button>
       {isOpenCatalog && (
         <div

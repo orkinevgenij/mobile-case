@@ -12,9 +12,9 @@ const NavBar = ({ brands, series, models }: TCategoryMenu) => {
   const session = useSession();
   const isLoggedIn = session.status === 'authenticated';
   return (
-    <div className='bg-orange-500 py-2 px-4 sm:px-20 md:px-30 '>
+    <div className='bg-orange-500 py-2 px-1 sm:px-20 md:px-30 '>
       <div className='w-full max-w-[1600px] mx-auto flex justify-between'>
-        <div className='flex items-center gap-4'>
+        <div className='flex items-center gap-2'>
           <button
             className='bg-white rounded-md text-orange-500 font-bold text-xl py-1 px-1 cursor-pointer hover:bg-orange-100'
             onClick={() => router.push('/')}
@@ -23,7 +23,7 @@ const NavBar = ({ brands, series, models }: TCategoryMenu) => {
           </button>
           <CategoryMenu brands={brands} series={series} models={models} />
         </div>
-        <div className='flex items-center gap-4 text-white text-xs'>
+        <div className='flex items-center gap-2 text-white text-xs'>
           <SearchInput />
           {!isLoggedIn && (
             <>
