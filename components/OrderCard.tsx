@@ -58,7 +58,7 @@ const OrderCard = ({ orders }: OrderCardProps) => {
   const router = useRouter();
 
   const changeUpdate = async (id: string, status: string) => {
-    const order = await updateStatusOrder('dsadas', status);
+    const order = await updateStatusOrder(id, status);
     if (order.success) {
       toast.success('Замовлення оновлено');
       router.refresh();
