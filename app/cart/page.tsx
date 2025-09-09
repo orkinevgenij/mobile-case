@@ -72,7 +72,7 @@ export default function Cart() {
               <span className='text-sm'>Всього:</span>
               <span className='font-bold'>{total} грн</span>
             </div>
-            <div className='flex justify-between'>
+            <div className='flex flex-wrap justify-between'>
               <Link href='/' className='inline-flex text-xl items-center gap-2 hover:text-gray-900'>
                 <ArrowLeft />
                 Повернутися до покупок
@@ -80,7 +80,7 @@ export default function Cart() {
               <Button
                 onClick={addOrder}
                 size='lg'
-                className='w-fit text-xl bg-green-600 hover:bg-green-600/90 cursor-pointer'
+                className='w-fit text-xl bg-green-600 hover:bg-green-600/90 cursor-pointer my-2 md'
               >
                 Оформити замовлення
               </Button>

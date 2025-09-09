@@ -82,7 +82,7 @@ const OrderCard = ({ orders }: OrderCardProps) => {
   };
   return (
     <Card className='p-4 text-gray-700 space-y-4 rounded-sm'>
-      <div className='flex justify-between items-center'>
+      <div className='flex gap-2 flex-wrap justify-between items-center'>
         <div>
           <p className='text-xl font-semibold'>Замовлення № {orders.number}</p>
           <p className='text-sm'>
