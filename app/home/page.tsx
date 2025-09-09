@@ -1,5 +1,5 @@
 import { getBrands, getModels, getSeries } from '@/actions/smartphones';
-import FilterForm from '@/components/common/FilterForm';
+import FilterForm from '@/components/FilterForm';
 import Container from '@/components/layout/Container';
 
 export default async function Home() {

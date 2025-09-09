@@ -1,7 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Prisma } from '@prisma/client';
-import NewProduct from './common/NewProduct';
-import PopularProduct from './common/PopularProduct';
+import NewProduct from './NewProduct';
+import PopularProduct from './PopularProduct';
 
 type CategoryTabsProps = {
   newProducts: Prisma.CaseGetPayload<{ include: { caseVariations: true } }>[];

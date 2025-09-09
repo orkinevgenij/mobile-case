@@ -1,24 +1,24 @@
-
+'use client'
 import { cn } from '@/lib/utils';
 import { TCategoryMenu } from '@/types/types';
 import { MenuIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
-import { Button } from '../ui/button';
+import { Button } from './ui/button';
 
-const CategoryMenu = ({ brands, series }: TCategoryMenu) => {
+const DesktopMenu = ({ brands, series }: TCategoryMenu) => {
   const [brandId, setBrandId] = useState<string | null>();
   const [isOpenCatalog, setIsOpenCatalog] = useState(false);
   const filteredSeries = series.filter((s) => s.brandId === brandId);
 
   return (
-    <div className='relative inline-block' onMouseLeave={() => setIsOpenCatalog(false)}>
+    <div className='relative hidden sm:flex md:flex xl:flex' onMouseLeave={() => setIsOpenCatalog(false)}>
       <Button
-        className='bg-orange-500 hover:bg-orange-400 text-white text-md flex items-center rounded-md shadow-md'
+        className='bg-orange-500 hover:bg-orange-400 text-white text-md flex items-center rounded-md shadow-md cursor-pointer'
         onMouseEnter={() => setIsOpenCatalog(true)}
       >
         <MenuIcon className='mr-2' />
-        <p className='hidden md:block xl:block'>Каталог</p>
+        <p>Каталог</p>
       </Button>
       {isOpenCatalog && (
         <div
@@ -32,7 +32,7 @@ const CategoryMenu = ({ brands, series }: TCategoryMenu) => {
           }}
         >
           <div className='w-[180px] border-r bg-gray-50 overflow-y-auto max-h-[450px]'>
-            {brands.map((brand) => (
+            {brands?.map((brand) => (
               <button
                 key={brand.id}
                 onMouseEnter={() => setBrandId(brand.id)}
@@ -76,4 +76,4 @@ const CategoryMenu = ({ brands, series }: TCategoryMenu) => {
   );
 };
 
-export default CategoryMenu;
+export default DesktopMenu;

@@ -8,7 +8,7 @@ import { Trash } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { Card } from '../ui/card';
+import { Card } from './ui/card';
 import {
   Select,
   SelectContent,
@@ -17,7 +17,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from '../ui/select';
+} from './ui/select';
 import { toast } from 'react-toastify';
 const statuses = [
   {

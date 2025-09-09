@@ -1,6 +1,6 @@
 import { getOrders } from '@/actions/order/orders';
-import OrderCard from '@/components/common/OrderCard';
-import OrdersEmpty from '@/components/common/OrdersEmpty';
+import OrderCard from '@/components/OrderCard';
+import OrdersEmpty from '@/components/OrdersEmpty';
 import Container from '@/components/layout/Container';
 
 export default async function OrdersUser() {

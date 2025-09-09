@@ -20,7 +20,7 @@ export default async function Series({ params }: { params: Promise<{ id: string 
   return (
     <Container>
       <>
-        <h1 className='text-xl font-semibold mb-4'>Чохли для {series[0].brand.name}</h1>
+        <h1 className='text-xl font-semibold mb-4'>Чохли для {series[0].name}</h1>
         <div className='grid justify-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2'>
           {series.map((s) => (
             <Link

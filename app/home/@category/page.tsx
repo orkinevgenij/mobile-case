@@ -1,7 +1,7 @@
 import { getNewProduct } from '@/actions/product/get-newproduct';
 import { getPopularProduct } from '@/actions/product/get-popularproduct';
-import NewProduct from '@/components/common/NewProduct';
-import PopularProduct from '@/components/common/PopularProduct';
+import NewProduct from '@/components/NewProduct';
+import PopularProduct from '@/components/PopularProduct';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 

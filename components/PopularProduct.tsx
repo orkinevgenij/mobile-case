@@ -5,9 +5,9 @@ import { Heart, ShoppingBasket } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import Container from '../layout/Container';
-import { Button } from '../ui/button';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../ui/card';
+import Container from './layout/Container';
+import { Button } from './ui/button';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from './ui/card';
 
 type PopularProductTabsProps = {
   popularProducts: Prisma.CaseGetPayload<{ include: { caseVariations: true } }>[];

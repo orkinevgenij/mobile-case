@@ -1,6 +1,6 @@
 'use client';
 import { createOrder } from '@/actions/order/create-order';
-import CartEmpty from '@/components/common/CartEmpty';
+import CartEmpty from '@/components/CartEmpty';
 import Container from '@/components/layout/Container';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
