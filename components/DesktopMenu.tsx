@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { cn } from '@/lib/utils';
 import { TCategoryMenu } from '@/types/types';
 import { MenuIcon } from 'lucide-react';
@@ -12,7 +12,10 @@ const DesktopMenu = ({ brands, series }: TCategoryMenu) => {
   const filteredSeries = series.filter((s) => s.brandId === brandId);
 
   return (
-    <div className='relative hidden sm:flex md:flex xl:flex' onMouseLeave={() => setIsOpenCatalog(false)}>
+    <div
+      className='relative hidden sm:flex md:flex xl:flex'
+      onMouseLeave={() => setIsOpenCatalog(false)}
+    >
       <Button
         className='bg-orange-500 hover:bg-orange-400 text-white text-md flex items-center rounded-md shadow-md cursor-pointer'
         onMouseEnter={() => setIsOpenCatalog(true)}
@@ -36,8 +39,9 @@ const DesktopMenu = ({ brands, series }: TCategoryMenu) => {
               <button
                 key={brand.id}
                 onMouseEnter={() => setBrandId(brand.id)}
-                className={`w-full text-left px-4 py-2 text-sm hover:bg-orange-100 transition-colors ${brand.id === brandId ? 'bg-orange-100 font-semibold' : ''
-                  }`}
+                className={`w-full text-left px-4 py-2 text-sm hover:bg-orange-100 transition-colors ${
+                  brand.id === brandId ? 'bg-orange-100 font-semibold' : ''
+                }`}
               >
                 <Link key={brand.id} href={`/series/${brand.id}`}>
                   {brand.name}
@@ -59,10 +63,11 @@ const DesktopMenu = ({ brands, series }: TCategoryMenu) => {
                   </Link>
                   <div className='space-y-1'>
                     {series.modelSmartphone?.map((model) => (
-                      <p key={model.id} className='text-sm  hover:text-orange-600 transition-colors cursor-pointer my-2'>
-                        <Link href={`/products/${model.id}`}>
-                          {model.name}
-                        </Link>
+                      <p
+                        key={model.id}
+                        className='text-sm  hover:text-orange-600 transition-colors cursor-pointer my-2'
+                      >
+                        <Link href={`/products/${model.id}`}>{model.name}</Link>
                       </p>
                     ))}
                   </div>

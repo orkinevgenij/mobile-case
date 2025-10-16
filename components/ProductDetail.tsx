@@ -36,8 +36,8 @@ const Detail = ({ product, variation, colors }: DetailsProps) => {
           <span className='w-fit rounded-md bg-green-600 px-2 py-1 text-xs font-semibold text-white'>
             В наявності
           </span>
-          <div className='relative aspect-square w-full max-w-md self-center overflow-hidden rounded-2xl bg-gray-50 shadow-sm'>
-            <Image src={variation.imgUrl || ''} alt='image' fill />
+          <div className='relative flex justify-center  rounded-2xl bg-gray-50 shadow-sm object-contain'>
+            <Image src={variation.imgUrl || ''} alt='image' width={150} height={200} />
           </div>
 
           <p className='text-2xl font-semibold text-rose-600'>{variation.price} ₴</p>

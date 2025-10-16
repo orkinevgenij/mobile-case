@@ -33,9 +33,12 @@ const NavBar = ({ brands, series, models }: TCategoryMenu) => {
               <LogIn size={25} />
               Увійти
             </div>
-
           )}
-          {isLoggedIn && <div className='hidden sm:flex md:flex xl:flex'><UserButton /></div>}
+          {isLoggedIn && (
+            <div className='hidden sm:flex md:flex xl:flex'>
+              <UserButton />
+            </div>
+          )}
           <div
             className='flex flex-col items-center cursor-pointer'
             onClick={() => router.push('/cart')}

@@ -6,7 +6,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Avatar } from '@radix-ui/react-avatar';
-import { LogOut, Settings, Smartphone, UserRound } from 'lucide-react';
+import { Contact, LogOut, Settings, Smartphone, Store, UserRound } from 'lucide-react';
 import { signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { AvatarFallback, AvatarImage } from '../ui/avatar';
@@ -38,6 +38,12 @@ const UserButton = () => {
               <Smartphone size={18} /> Замовлення
             </DropdownMenuItem>
           )}
+          <DropdownMenuItem onClick={() => router.push('/contacts')}>
+            <Contact size={18} /> Контакти
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => router.push('/about')}>
+            <Store size={18} /> Про магазин
+          </DropdownMenuItem>
           <DropdownMenuItem onClick={() => signOut()}>
             <LogOut size={18} /> Вийти
           </DropdownMenuItem>
