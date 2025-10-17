@@ -84,7 +84,7 @@ const VariationAddForm = ({ caseId }: { caseId: string }) => {
             <FormField
               control={form.control}
               name='imgUrl'
-              render={({ }) => (
+              render={({}) => (
                 <FormItem>
                   <FormControl>
                     <Input
@@ -167,7 +167,7 @@ const VariationAddForm = ({ caseId }: { caseId: string }) => {
               )}
             />
           </div>
-          <Button type='submit' className='w-full bg-amber-500 cursor-pointer'>
+          <Button type='submit' className='w-full bg-green-500 cursor-pointer'>
             {'Додати'}
           </Button>
         </form>

@@ -43,23 +43,23 @@ const AddFormProduct = ({ brands, series, models, isEdit, product }: AddProductP
     resolver: zodResolver(CaseSchema),
     defaultValues: isEdit
       ? {
-        name: product?.name,
-        description: product?.description,
-        brand: product?.modelSmartphone?.series?.brandId || '',
-        series: product?.modelSmartphone?.series?.id || '',
-        model: product?.modelSmartphone?.id || '',
-        guarantee: product?.guarantee || 0,
-        material: product?.material || '',
-      }
+          name: product?.name,
+          description: product?.description,
+          brand: product?.modelSmartphone?.series?.brandId || '',
+          series: product?.modelSmartphone?.series?.id || '',
+          model: product?.modelSmartphone?.id || '',
+          guarantee: product?.guarantee || 0,
+          material: product?.material || '',
+        }
       : {
-        name: '',
-        description: '',
-        brand: '',
-        series: '',
-        model: '',
-        guarantee: 0,
-        material: '',
-      },
+          name: '',
+          description: '',
+          brand: '',
+          series: '',
+          model: '',
+          guarantee: 0,
+          material: '',
+        },
   });
 
   const onSubmit = async (values: CaseSchemaType) => {
@@ -247,7 +247,7 @@ const AddFormProduct = ({ brands, series, models, isEdit, product }: AddProductP
             />
           </div>
 
-          <Button disabled={isLoading} type='submit' className='w-full bg-amber-500 cursor-pointer'>
+          <Button disabled={isLoading} type='submit' className='w-full bg-green-500 cursor-pointer'>
             {isEdit ? 'Редагувати' : 'Додати'}
           </Button>
         </form>

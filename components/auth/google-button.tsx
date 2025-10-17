@@ -12,7 +12,7 @@ const GoogleLogin = () => {
         className='flex flex-row items-center gap-3 w-full cursor-pointer'
       >
         <BsGoogle />
-        <span className='text-orange-400'>Увійти через Google</span>
+        <span className='text-green-400'>Увійти через Google</span>
       </Button>
       <p>{errorMsgGoogle}</p>
     </form>

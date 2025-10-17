@@ -38,15 +38,15 @@ export default async function RootLayout({
           <NavBar brands={brands} series={series} models={models} />
           <main className='flex-grow'>{children}</main>
           <NextTopLoader
-            color="yellow"
+            color='green'
             initialPosition={0.3}
             crawlSpeed={200}
             height={3}
             crawl={true}
             showSpinner={false}
-            easing="ease"
+            easing='ease'
             speed={200}
-            shadow="0 0 10px #29D,0 0 5px #29D"
+            shadow='0 0 10px #29D,0 0 5px #29D'
           />
           <ToastContainer position='bottom-center' />
         </body>

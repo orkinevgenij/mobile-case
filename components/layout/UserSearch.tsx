@@ -42,7 +42,7 @@ const UserSearch = () => {
   return (
     <>
       <div
-        className='flex flex-col items-center cursor-pointer'
+        className='flex flex-col items-center cursor-pointer hover:text-green-400'
         onClick={() => setShowInput((prev) => !prev)}
       >
         <Search size={25} />
@@ -65,7 +65,11 @@ const UserSearch = () => {
             placeholder='Пошук'
             className='bg-white text-slate-800 w-full text-center py-10 mx-2'
           />
-          <Button type='submit' size='lg' className='absolute right-4 top-6'>
+          <Button
+            type='submit'
+            size='lg'
+            className='absolute right-4 top-6 bg-green-500 hover:bg-green-400 cursor-pointer'
+          >
             Пошук
           </Button>
         </form>

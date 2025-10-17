@@ -18,8 +18,9 @@ const Tabs = () => {
         {tabs.map((tab, idx) => (
           <p
             key={idx}
-            className={`cursor-pointer text-md font-bold ${index === idx ? `text-blue-400 ` : ` text-neutral-800`
-              }`}
+            className={`cursor-pointer text-md font-bold ${
+              index === idx ? `text-blue-400 ` : ` text-neutral-800`
+            }`}
             onClick={() => setIndex(idx)}
           >
             {tab.name}

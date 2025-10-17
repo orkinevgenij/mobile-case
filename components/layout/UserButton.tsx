@@ -8,11 +8,10 @@ import {
 import { Avatar } from '@radix-ui/react-avatar';
 import { Contact, LogOut, Settings, Smartphone, Store, UserRound } from 'lucide-react';
 import { signOut, useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
 import { AvatarFallback, AvatarImage } from '../ui/avatar';
+import Link from 'next/link';
 const UserButton = () => {
   const session = useSession();
-  const router = useRouter();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -29,20 +28,28 @@ const UserButton = () => {
       <DropdownMenuContent className='w-56' align='start'>
         <DropdownMenuGroup>
           {session.data?.user?.role === 'ADMIN' && (
-            <DropdownMenuItem onClick={() => router.push('/dashboard')}>
-              <Settings size={18} /> Управління
+            <DropdownMenuItem asChild>
+              <Link href={'/dashboard'}>
+                <Settings size={18} /> Управління
+              </Link>
             </DropdownMenuItem>
           )}
           {session.data?.user?.role === 'USER' && (
-            <DropdownMenuItem onClick={() => router.push('/orders')}>
-              <Smartphone size={18} /> Замовлення
+            <DropdownMenuItem asChild>
+              <Link href={'/orders'}>
+                <Smartphone size={18} /> Замовлення
+              </Link>
             </DropdownMenuItem>
           )}
-          <DropdownMenuItem onClick={() => router.push('/contacts')}>
-            <Contact size={18} /> Контакти
+          <DropdownMenuItem asChild>
+            <Link href={'/contacts'}>
+              <Contact size={18} /> Контакти
+            </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => router.push('/about')}>
-            <Store size={18} /> Про магазин
+          <DropdownMenuItem asChild>
+            <Link href={'/about'}>
+              <Store size={18} /> Про магазин
+            </Link>
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => signOut()}>
             <LogOut size={18} /> Вийти

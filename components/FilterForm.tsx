@@ -119,7 +119,7 @@ const FilterForm = ({ brands, series, models }: FilterFormProps) => {
             )}
           />
         </div>
-        <Button type='submit' className='w-fit bg-amber-500 cursor-pointer'>
+        <Button type='submit' className='w-fit bg-green-500 hover:bg-green-400 cursor-pointer'>
           Пошук
         </Button>
       </form>

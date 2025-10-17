@@ -1,51 +1,46 @@
 'use client';
 import { TCategoryMenu } from '@/types/types';
-import { LogIn, ShoppingBasket } from 'lucide-react';
+import { LogIn, ShoppingBasket, Smartphone } from 'lucide-react';
 import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
 import UserButton from './UserButton';
 import SearchInput from './UserSearch';
 import { Menu } from '../Menu';
+import Link from 'next/link';
 
 const NavBar = ({ brands, series, models }: TCategoryMenu) => {
-  const router = useRouter();
   const session = useSession();
   const isLoggedIn = session.status === 'authenticated';
   return (
-    <div className='bg-orange-500 px-1 py-1 '>
+    <div className='shadow-sm px-4 py-3 '>
       <div className='w-full max-w-[1600px] mx-auto flex justify-between'>
         <div className='flex items-center gap-2'>
           <Menu brands={brands} series={series} models={models} />
-          <button
-            className='bg-white rounded-md text-orange-500 font-bold text-xl py-1 px-1 cursor-pointer hover:bg-orange-100'
-            onClick={() => router.push('/')}
+          <Link
+            href={'/'}
+            className='flex items-center gap-2 bg-white rounded-md text-green-500 font-bold text-xl py-1 px-1 cursor-pointer hover:text-green-400'
           >
-            NewCase
-          </button>
+            <Smartphone /> NewCase
+          </Link>
         </div>
-        <div className='flex items-center gap-2 text-white text-xs'>
-          <SearchInput />
+        <div className='flex items-center gap-2  text-green-500 text-xs'>
+          {isLoggedIn && <UserButton />}
           {!isLoggedIn && (
-            <div
-              className='hidden sm:flex md:flex xl:flex flex-col items-center cursor-pointer'
-              onClick={() => router.push('/auth/login')}
+            <Link
+              href={'/auth/login'}
+              className='hidden sm:flex md:flex xl:flex flex-col items-center text-green-500 hover:text-green-400'
             >
               <LogIn size={25} />
               Увійти
-            </div>
+            </Link>
           )}
-          {isLoggedIn && (
-            <div className='hidden sm:flex md:flex xl:flex'>
-              <UserButton />
-            </div>
-          )}
-          <div
-            className='flex flex-col items-center cursor-pointer'
-            onClick={() => router.push('/cart')}
+          <SearchInput />
+          <Link
+            href={'/cart'}
+            className='flex flex-col items-center  text-green-500 hover:text-green-400'
           >
             <ShoppingBasket size={25} />
             <span>Кошик</span>
-          </div>
+          </Link>
         </div>
       </div>
     </div>

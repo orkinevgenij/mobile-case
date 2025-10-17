@@ -20,9 +20,9 @@ const Variations = ({ variations, caseId }: VariationsProps) => {
       <div className='flex justify-center gap-2 items-center'>
         <div className='flex flex-col items-center mt-8 '>
           <Link href={`/dashboard/add-variation/${caseId}`}>
-            <div className='group flex flex-col items-center justify-center p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md hover:border-orange-500 transition bg-white text-center cursor-pointer'>
-              <Plus size={50} className='text-orange-500 group-hover:text-orange-600 transition' />
-              <h2 className='mt-4 text-lg font-semibold text-gray-700 group-hover:text-orange-600'>
+            <div className='group flex flex-col items-center justify-center p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md hover:border-green-500 transition bg-white text-center cursor-pointer'>
+              <Plus size={50} className='text-green-500 group-hover:text-green-500 transition' />
+              <h2 className='mt-4 text-lg font-semibold text-gray-700 group-hover:text-green-500'>
                 Додати колір
               </h2>
             </div>
@@ -34,11 +34,12 @@ const Variations = ({ variations, caseId }: VariationsProps) => {
           key={variation.id}
           className='flex flex-col md:flex-row items-center gap-4 p-4 border shadow-sm rounded-xl hover:shadow-md transition'
         >
-          <div className='w-[120px] h-[120px] relative rounded-lg overflow-hidden border'>
+          <div className='relative'>
             <Image
               src={variation.imgUrl || '/placeholder.jpg'}
               alt={variation.color}
-              fill
+              width={100}
+              height={100}
               className='object-contain'
             />
           </div>

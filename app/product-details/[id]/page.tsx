@@ -1,16 +1,18 @@
-import { updateViews } from "@/actions/product/update-count";
-import NotFound from "./not-found";
-import { prisma } from "@/lib/prisma";
-import Detail from "@/components/ProductDetail";
+import { updateViews } from '@/actions/product/update-count';
+import NotFound from './not-found';
+import { prisma } from '@/lib/prisma';
+import Detail from '@/components/ProductDetail';
 
-export default async function ProductDetails({ params, searchParams }: {
+export default async function ProductDetails({
+  params,
+  searchParams,
+}: {
   params: Promise<{ id: string }>;
   searchParams: Promise<{ color?: string }>;
 }) {
   const { id } = await params;
   const { color } = await searchParams;
 
-  // Параллельный запуск двух запросов
   const [product, allColors] = await Promise.all([
     prisma.case.findUnique({ where: { id } }),
     prisma.caseVariation.findMany({
@@ -36,10 +38,6 @@ export default async function ProductDetails({ params, searchParams }: {
 
   if (!activeVariation) return NotFound();
   return (
-    <Detail
-      product={product}
-      colors={allColors.map((c) => c.color)}
-      variation={activeVariation}
-    />
+    <Detail product={product} colors={allColors.map((c) => c.color)} variation={activeVariation} />
   );
 }

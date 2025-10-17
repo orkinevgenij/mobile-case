@@ -39,26 +39,36 @@ export default function Cart() {
           {cartItems.map((item) => (
             <Card
               key={item.id}
-              className='flex flex-row items-center justify-between text-gray-600 px-4'
+              className='flex flex-row  items-center justify-between text-gray-600 px-4'
             >
-              <div className='relative w-16 h-16'>
-                <Image src={item.imgUrl || ''} alt={item.name} fill />
+              <div className='relative'>
+                <Image
+                  src={item.imgUrl || ''}
+                  alt={item.name}
+                  width={50}
+                  height={50}
+                  objectFit='contain'
+                />
               </div>
-              <div className='flex flex-col flex-1'>
-                <Link href={`/product-details/${item.caseId}?color=${item.color}`}>
+              <div className='flex flex-col'>
+                <Link href={`/product-details/${item.caseId}?color=${item.color}`} className='mb-2'>
                   {item.name}
                 </Link>
-                <p>{item.price} ₴</p>
+                <div className='flex items-center gap-2 rounded-sm border-1 border-gray-500 px-4 py-1.5'>
+                  <Minus
+                    className='cursor-pointer text-black'
+                    onClick={() => minusCartItem(item.id)}
+                  />
+                  <span>{item.quantity}</span>
+                  <Plus
+                    className='cursor-pointer text-black'
+                    onClick={() => plusCartItem(item.id)}
+                  />
+                </div>
               </div>
-              <div className='flex items-center gap-2 rounded-sm border-1 border-gray-500 px-4 py-1.5'>
-                <Minus
-                  className='cursor-pointer text-black'
-                  onClick={() => minusCartItem(item.id)}
-                />
-                <span>{item.quantity}</span>
-                <Plus className='cursor-pointer text-black' onClick={() => plusCartItem(item.id)} />
-              </div>
-              <p className='font-bold'>{item.price} ₴</p>
+              <p className='font-bold'>
+                {item.price} ₴ * {item.quantity}
+              </p>
               <Trash
                 size={30}
                 className='cursor-pointer opacity-70 hover:opacity-100'
@@ -90,4 +100,4 @@ export default function Cart() {
       )}
     </Container>
   );
-};
+}

@@ -17,7 +17,7 @@ const DesktopMenu = ({ brands, series }: TCategoryMenu) => {
       onMouseLeave={() => setIsOpenCatalog(false)}
     >
       <Button
-        className='bg-orange-500 hover:bg-orange-400 text-white text-md flex items-center rounded-md shadow-md cursor-pointer'
+        className='bg-green-500 hover:bg-green-400 text-white text-md flex items-center rounded-md shadow-md cursor-pointer'
         onMouseEnter={() => setIsOpenCatalog(true)}
       >
         <MenuIcon className='mr-2' />
@@ -34,13 +34,13 @@ const DesktopMenu = ({ brands, series }: TCategoryMenu) => {
             setBrandId(null);
           }}
         >
-          <div className='w-[180px] border-r bg-gray-50 overflow-y-auto max-h-[450px]'>
+          <div className='w-[180px] border-r overflow-y-auto max-h-[450px]'>
             {brands?.map((brand) => (
               <button
                 key={brand.id}
                 onMouseEnter={() => setBrandId(brand.id)}
-                className={`w-full text-left px-4 py-2 text-sm hover:bg-orange-100 transition-colors ${
-                  brand.id === brandId ? 'bg-orange-100 font-semibold' : ''
+                className={`w-full text-left px-4 py-2 text-sm  transition-colors cursor-pointer ${
+                  brand.id === brandId ? 'bg-green-100 font-semibold' : ''
                 }`}
               >
                 <Link key={brand.id} href={`/series/${brand.id}`}>
@@ -65,7 +65,7 @@ const DesktopMenu = ({ brands, series }: TCategoryMenu) => {
                     {series.modelSmartphone?.map((model) => (
                       <p
                         key={model.id}
-                        className='text-sm  hover:text-orange-600 transition-colors cursor-pointer my-2'
+                        className='text-sm  hover:text-green-600 transition-colors cursor-pointer my-2'
                       >
                         <Link href={`/products/${model.id}`}>{model.name}</Link>
                       </p>

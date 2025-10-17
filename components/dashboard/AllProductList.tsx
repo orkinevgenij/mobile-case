@@ -19,7 +19,7 @@ const AllProductList = ({ products }: AllProductListProps) => {
       {products.map((product) => (
         <Card
           key={product.id}
-          className='cursor-pointer transition-shadow hover:shadow-lg hover:shadow-orange-200'
+          className='cursor-pointer transition-shadow hover:shadow-lg hover:shadow-green-200'
           onClick={() => router.push(`/dashboard/product-variations/${product.id}`)}
         >
           <CardHeader>

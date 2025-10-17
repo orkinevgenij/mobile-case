@@ -9,9 +9,8 @@ export default async function Orders({
 }: {
   searchParams: Promise<{
     filter: 'asc' | 'desc';
-  }>
+  }>;
 }) {
-
   const { filter } = await searchParams;
   const orders = await getOrders(filter);
 
@@ -29,4 +28,4 @@ export default async function Orders({
       </div>
     </Container>
   );
-};
+}

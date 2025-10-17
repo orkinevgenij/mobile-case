@@ -1,7 +1,7 @@
 'use client';
 import { Case, Prisma } from '@prisma/client';
 import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 
 import { cn } from '@/lib/utils';
 import { useCartStore } from '@/store/store';
@@ -19,7 +19,6 @@ type DetailsProps = {
 };
 
 const Detail = ({ product, variation, colors }: DetailsProps) => {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const activeColor = searchParams.get('color') ?? variation.color;
   const { cartItems, addToCart } = useCartStore();
@@ -36,8 +35,8 @@ const Detail = ({ product, variation, colors }: DetailsProps) => {
           <span className='w-fit rounded-md bg-green-600 px-2 py-1 text-xs font-semibold text-white'>
             В наявності
           </span>
-          <div className='relative flex justify-center  rounded-2xl bg-gray-50 shadow-sm object-contain'>
-            <Image src={variation.imgUrl || ''} alt='image' width={150} height={200} />
+          <div className='relative flex justify-center object-contain'>
+            <Image src={variation.imgUrl || ''} alt='image' width={300} height={200} />
           </div>
 
           <p className='text-2xl font-semibold text-rose-600'>{variation.price} ₴</p>
@@ -64,10 +63,9 @@ const Detail = ({ product, variation, colors }: DetailsProps) => {
             </div>
           </div>
           {isProductInCart ? (
-            <ShoppingBasket
-              className='text-orange-600 cursor-pointer hover:opacity-80'
-              onClick={() => router.push('/cart')}
-            />
+            <Link href={'/cart'}>
+              <ShoppingBasket className='text-green-500 cursor-pointer hover:opacity-80' />
+            </Link>
           ) : (
             <Button
               size='lg'

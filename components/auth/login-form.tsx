@@ -66,7 +66,7 @@ const LoginForm = () => {
               name='email'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className='text-orange-400'>Е-пошта</FormLabel>
+                  <FormLabel className='text-green-400'>Е-пошта</FormLabel>
                   <FormControl>
                     <Input {...field} placeholder='Е-пошта' type='email' />
                   </FormControl>
@@ -79,7 +79,7 @@ const LoginForm = () => {
               name='password'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className='text-orange-400'>Пароль</FormLabel>
+                  <FormLabel className='text-green-400'>Пароль</FormLabel>
                   <FormControl>
                     <Input {...field} placeholder='******' type='password' />
                   </FormControl>
@@ -87,7 +87,7 @@ const LoginForm = () => {
                 </FormItem>
               )}
             />
-            <Link href='#' className='text-orange-400'>
+            <Link href='#' className='text-green-400'>
               Забули пароль?
             </Link>
           </div>
@@ -95,7 +95,7 @@ const LoginForm = () => {
           <FormError message={error} />
           <Button
             type='submit'
-            className='w-full cursor-pointer text-orange-400'
+            className='w-full cursor-pointer text-green-500 hover:text-green-400 '
             variant={'outline'}
             disabled={loading}
           >
