@@ -10,7 +10,7 @@ export default auth(async (req) => {
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
   const role = token?.role;
-  const baseUrl = process.env.BASE_URL!;
+  const BASE_URL = process.env.BASE_URL!;
   const isPrivateRoute = privateRoutes.includes(nextUrl.pathname);
   const isApiRoute = nextUrl.pathname.includes('/api');
   const isAuthRoute = nextUrl.pathname.includes('/auth');
@@ -21,7 +21,7 @@ export default auth(async (req) => {
   }
 
   if (isLoggedIn && isAuthRoute) {
-    return Response.redirect(`${baseUrl}/`);
+    return Response.redirect(`${BASE_URL}/`);
   }
 
   if (isAuthRoute && !isLoggedIn) {
@@ -29,11 +29,11 @@ export default auth(async (req) => {
   }
 
   if (isPrivateRoute && !isLoggedIn) {
-    return Response.redirect(`${baseUrl}/auth/login`);
+    return Response.redirect(`${BASE_URL}/auth/login`);
   }
 
   if (isAdminRoute) {
-    if (role !== 'ADMIN') return Response.redirect(`${baseUrl}`);
+    if (role !== 'ADMIN') return Response.redirect(`${BASE_URL}`);
   }
 });
 
