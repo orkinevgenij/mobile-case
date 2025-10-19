@@ -13,13 +13,11 @@ export default auth(async (req) => {
   const isLoggedIn = !!token;
   const role = token?.role;
   const NEXT_PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || nextUrl.origin;
-  console.log(NEXT_PUBLIC_BASE_URL);
-
   const isPrivateRoute = privateRoutes.some((r) => nextUrl.pathname.startsWith(r));
-  console.log(isPrivateRoute);
   const isAuthLogin = nextUrl.pathname === '/auth/login' || nextUrl.pathname === '/auth/register';
+  console.log(nextUrl.pathname);
   const isAdminRoute = nextUrl.pathname.startsWith('/dashboard');
-
+  console.log('admin route', isAdminRoute);
   if (nextUrl.pathname.startsWith('/api')) return;
 
   if (isLoggedIn && isAuthLogin) {
@@ -36,5 +34,5 @@ export default auth(async (req) => {
 });
 
 export const config = {
-  matcher: ['/((?!.+\\.[\\w]+$|_next|api).*)', '/'],
+  matcher: ['/((?!.+\\.[\\w]+$|_next|api).*)', '/', '/home'],
 };

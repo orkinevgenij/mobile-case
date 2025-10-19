@@ -3,12 +3,11 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default async function HomeLayout({
   children,
-  category
+  category,
 }: Readonly<{
   children: React.ReactNode;
-  category: React.ReactNode
+  category: React.ReactNode;
 }>) {
-
   return (
     <div>
       {children}
