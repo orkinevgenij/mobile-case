@@ -1,6 +1,5 @@
 import NextAuth from 'next-auth';
 import { getToken } from 'next-auth/jwt';
-import { NextResponse } from 'next/server';
 import authConfig from './auth.config';
 import { privateRoutes } from './routes';
 
@@ -9,30 +8,35 @@ const { auth } = NextAuth(authConfig);
 export default auth(async (req) => {
   const token = await getToken({ req, secret: process.env.AUTH_SECRET });
   const { nextUrl } = req;
-
-  const isLoggedIn = !!token;
+  const isLoggedIn = !!req.auth;
   const role = token?.role;
-  const NEXT_PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || nextUrl.origin;
-  const isPrivateRoute = privateRoutes.some((r) => nextUrl.pathname.startsWith(r));
-  const isAuthLogin = nextUrl.pathname === '/auth/login' || nextUrl.pathname === '/auth/register';
-  console.log(nextUrl.pathname);
+  const NEXT_PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL!;
+  const isPrivateRoute = privateRoutes.includes(nextUrl.pathname);
+  const isApiRoute = nextUrl.pathname.includes('/api');
+  const isAuthRoute = nextUrl.pathname.includes('/auth');
   const isAdminRoute = nextUrl.pathname.startsWith('/dashboard');
-  console.log('admin route', isAdminRoute);
-  if (nextUrl.pathname.startsWith('/api')) return;
 
-  if (isLoggedIn && isAuthLogin) {
-    return NextResponse.redirect(new URL('/', NEXT_PUBLIC_BASE_URL));
+  if (isApiRoute) {
+    return;
+  }
+
+  if (isLoggedIn && isAuthRoute) {
+    return Response.redirect(`${NEXT_PUBLIC_BASE_URL}/`);
+  }
+
+  if (isAuthRoute && !isLoggedIn) {
+    return;
   }
 
   if (isPrivateRoute && !isLoggedIn) {
-    return NextResponse.redirect(new URL('/auth/login', NEXT_PUBLIC_BASE_URL));
+    return Response.redirect(`${NEXT_PUBLIC_BASE_URL}/auth/login`);
   }
 
-  if (isAdminRoute && role !== 'ADMIN') {
-    return NextResponse.redirect(new URL('/', NEXT_PUBLIC_BASE_URL));
+  if (isAdminRoute) {
+    if (role !== 'ADMIN') return Response.redirect(`${NEXT_PUBLIC_BASE_URL}`);
   }
 });
 
 export const config = {
-  matcher: ['/((?!.+\\.[\\w]+$|_next|api).*)', '/', '/home'],
+  matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
 };
