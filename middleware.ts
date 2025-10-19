@@ -13,8 +13,10 @@ export default auth(async (req) => {
   const isLoggedIn = !!token;
   const role = token?.role;
   const NEXT_PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || nextUrl.origin;
+  console.log(NEXT_PUBLIC_BASE_URL);
 
   const isPrivateRoute = privateRoutes.some((r) => nextUrl.pathname.startsWith(r));
+  console.log(isPrivateRoute);
   const isAuthLogin = nextUrl.pathname === '/auth/login' || nextUrl.pathname === '/auth/register';
   const isAdminRoute = nextUrl.pathname.startsWith('/dashboard');
 
