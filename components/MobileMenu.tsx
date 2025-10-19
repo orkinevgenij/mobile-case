@@ -63,14 +63,17 @@ export default function MobileMenu() {
           </DrawerClose>
           <div className='h-[0.5px] bg-green-300 w-full' />
           <div className='flex flex-col gap-2'>
-            <DrawerClose asChild>
-              <Link href={'/orders'} className='text-gray-700'>
-                Замовлення
-              </Link>
-            </DrawerClose>
-            {session.data?.user?.role === 'ADMIN' && (
+            {session.data?.user?.role === 'USER' && (
               <DrawerClose asChild>
                 <Link href={'/orders'} className='text-gray-700'>
+                  Замовлення
+                </Link>
+              </DrawerClose>
+            )}
+
+            {session.data?.user?.role === 'ADMIN' && (
+              <DrawerClose asChild>
+                <Link href={'/dashboard/orders'} className='text-gray-700'>
                   Управління
                 </Link>
               </DrawerClose>
