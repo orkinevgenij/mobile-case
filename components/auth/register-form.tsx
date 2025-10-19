@@ -66,7 +66,7 @@ const RegisterForm = () => {
               name='email'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>E-пошта</FormLabel>
+                  <FormLabel className='text-green-500'>E-пошта</FormLabel>
                   <FormControl>
                     <Input {...field} placeholder='E-mail' type='email' />
                   </FormControl>
@@ -79,7 +79,7 @@ const RegisterForm = () => {
               name='name'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Ім&apos;я</FormLabel>
+                  <FormLabel className='text-green-500'>Ім&apos;я</FormLabel>
                   <FormControl>
                     <Input {...field} placeholder="Ім'я" />
                   </FormControl>
@@ -92,7 +92,7 @@ const RegisterForm = () => {
               name='password'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Пароль</FormLabel>
+                  <FormLabel className='text-green-500'>Пароль</FormLabel>
                   <FormControl>
                     <Input {...field} placeholder='******' type='password' />
                   </FormControl>
@@ -105,7 +105,7 @@ const RegisterForm = () => {
               name='passwordConfirmation'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Підтвердіть пароль</FormLabel>
+                  <FormLabel className='text-green-500'>Підтвердіть пароль</FormLabel>
                   <FormControl>
                     <Input {...field} placeholder='******' type='password' />
                   </FormControl>
@@ -116,7 +116,11 @@ const RegisterForm = () => {
           </div>
           <FormSuccess message={success} />
           <FormError message={error} />
-          <Button type='submit' className='w-full cursor-pointer' disabled={loading}>
+          <Button
+            type='submit'
+            className='w-full cursor-pointer bg-green-500 hover:bg-green-400'
+            disabled={loading}
+          >
             {loading ? 'Хвилинку...' : 'Реєстрація'}
           </Button>
         </form>

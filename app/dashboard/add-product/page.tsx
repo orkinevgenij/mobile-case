@@ -7,10 +7,10 @@ export default async function AddProduct() {
   const fetchSeries = await getSeries();
   const fetchModels = await getModels();
 
-  const [brands, series, models] = await Promise.all([fetchBrands, fetchSeries, fetchModels])
+  const [brands, series, models] = await Promise.all([fetchBrands, fetchSeries, fetchModels]);
   return (
     <Container>
       <AddFormProduct brands={brands} series={series} models={models} />
     </Container>
   );
-};
+}

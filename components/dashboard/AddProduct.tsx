@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Brand, Model, Prisma, Series } from '@prisma/client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import CardWrapper from '../auth/card-wrapper';
 import { Button } from '../ui/button';
@@ -14,6 +14,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '../ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { Textarea } from '../ui/textarea';
+import MDEditor from '@uiw/react-md-editor';
 
 type AddProductProps = {
   brands: Brand[];
@@ -121,12 +122,23 @@ const AddFormProduct = ({ brands, series, models, isEdit, product }: AddProductP
             <FormField
               control={form.control}
               name='description'
+              rules={{
+                required: 'Описание обязательно',
+              }}
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Опис</FormLabel>
-                  <FormControl>
-                    <Textarea {...field} placeholder='Введіть опис' />
-                  </FormControl>
+                  <MDEditor
+                    data-color-mode='light'
+                    className='p-4 bg-gray-50 rounded-xl'
+                    textareaProps={{
+                      placeholder: 'Введіть опис',
+                    }}
+                    {...field}
+                    value={field.value}
+                    onChange={(val) => field.onChange(val || '')}
+                    height={200}
+                  />
                   <FormMessage />
                 </FormItem>
               )}

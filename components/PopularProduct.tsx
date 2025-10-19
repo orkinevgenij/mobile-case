@@ -51,7 +51,7 @@ const PopularProduct = ({ popularProducts }: PopularProductTabsProps) => {
               <p className='rounded-md bg-green-500/90 px-1.5 py-0.5 text-xs font-medium text-white'>
                 В наявності
               </p>
-              <div className='flex w-full flex-col items-center gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100'>
+              <div className='flex w-full flex-col items-center gap-2 '>
                 {cartItems.some((item) => item.id === product.caseVariations[0].id) ? (
                   <Link href={'/cart'}>
                     <ShoppingBasket className='text-green-600 cursor-pointer hover:opacity-80' />

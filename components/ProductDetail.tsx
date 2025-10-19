@@ -11,7 +11,7 @@ import Container from './layout/Container';
 import Table from './TableComponent';
 import Tabs from './Tabs';
 import { Button } from './ui/button';
-
+import MarkdownPreview from '@uiw/react-markdown-preview';
 type DetailsProps = {
   product: Case;
   variation: Prisma.CaseVariationGetPayload<{ include: { case: true } }>;
@@ -38,9 +38,14 @@ const Detail = ({ product, variation, colors }: DetailsProps) => {
           <div className='relative flex justify-center object-contain'>
             <Image src={variation.imgUrl || ''} alt='image' width={300} height={200} />
           </div>
-
           <p className='text-2xl font-semibold text-rose-600'>{variation.price} ₴</p>
-          <p className='text-gray-600'>{variation.case.description}</p>
+          <MarkdownPreview
+            style={{
+              background: 'white',
+              color: 'black',
+            }}
+            source={variation.case.description}
+          />
           <Table variation={variation} />
         </div>
         <div className='flex flex-col gap-6'>

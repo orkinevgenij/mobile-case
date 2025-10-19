@@ -37,9 +37,6 @@ const NewProduct = ({ newProducts }: NewProductTabsProps) => {
                     className='object-contain transition-transform duration-300 group-hover:scale-110'
                   />
                 </div>
-                <p className='line-clamp-3 text-center text-sm text-slate-500 transition-colors duration-200 group-hover:text-slate-900'>
-                  {product.description}
-                </p>
               </Link>
             </CardContent>
 
@@ -50,7 +47,7 @@ const NewProduct = ({ newProducts }: NewProductTabsProps) => {
               <p className='rounded-md bg-green-500/90 px-1.5 py-0.5 text-xs font-medium text-white'>
                 В наявності
               </p>
-              <div className='flex w-full flex-col items-center gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100'>
+              <div className='flex w-full flex-col items-center gap-2 '>
                 {cartItems.some((item) => item.id === product.caseVariations[0].id) ? (
                   <Link href={'/cart'}>
                     <ShoppingBasket className='text-green-500 cursor-pointer hover:opacity-80' />

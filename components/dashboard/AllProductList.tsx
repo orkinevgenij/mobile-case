@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation';
 import { Button } from '../ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import DashboardSearch from './DashboardSearch';
+import MarkdownPreview from '@uiw/react-markdown-preview';
+
 type AllProductListProps = {
   products: Prisma.CaseGetPayload<{ include: { caseVariations: true } }>[];
 };
@@ -28,8 +30,15 @@ const AllProductList = ({ products }: AllProductListProps) => {
           </CardHeader>
           <CardContent className='flex flex-col gap-4'>
             <CardDescription className='text-sm text-gray-500 line-clamp-2'>
-              {product.description}
+              <MarkdownPreview
+                style={{
+                  background: 'white',
+                  color: 'black',
+                }}
+                source={product.description}
+              />{' '}
             </CardDescription>
+
             <div className='space-y-2'>
               <p className='font-medium text-gray-700'>Варіації:</p>
               {product.caseVariations.length === 0 ? (

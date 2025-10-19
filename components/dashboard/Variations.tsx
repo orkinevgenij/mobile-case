@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '../ui/button';
 import { Card, CardAction, CardContent, CardDescription, CardTitle } from '../ui/card';
+import MarkdownPreview from '@uiw/react-markdown-preview';
 
 type VariationsProps = {
   variations: Prisma.CaseVariationGetPayload<{ include: { case: true } }>[];
@@ -47,7 +48,13 @@ const Variations = ({ variations, caseId }: VariationsProps) => {
             <CardTitle className='hover:opacity-70 cursor-pointer'>{variation.case.name}</CardTitle>
             <p className='text-sm text-gray-500'>ID: {variation.id}</p>
             <CardDescription className='text-sm text-gray-500 line-clamp-2'>
-              {variation.case.description}
+              <MarkdownPreview
+                style={{
+                  background: 'white',
+                  color: 'black',
+                }}
+                source={variation.case.description}
+              />{' '}
             </CardDescription>
             <div
               key={variation.id}
