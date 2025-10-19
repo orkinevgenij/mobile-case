@@ -12,7 +12,7 @@ export default auth(async (req) => {
 
   const isLoggedIn = !!token;
   const role = token?.role;
-  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || nextUrl.origin;
+  const BASE_URL = process.env.BASE_URL || nextUrl.origin;
 
   const isPrivateRoute = privateRoutes.some((r) => nextUrl.pathname.startsWith(r));
   const isAuthLogin = nextUrl.pathname === '/auth/login' || nextUrl.pathname === '/auth/register';
