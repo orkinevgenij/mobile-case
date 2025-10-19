@@ -2,14 +2,15 @@ import NextAuth from 'next-auth';
 import { getToken } from 'next-auth/jwt';
 import authConfig from './auth.config';
 import { privateRoutes } from './routes';
+import { useSession } from 'next-auth/react';
 
 const { auth } = NextAuth(authConfig);
-
 export default auth(async (req) => {
   const token = await getToken({ req, secret: process.env.AUTH_SECRET });
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
   const role = token?.role;
+  console.log('role', role);
   const NEXT_PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL!;
   const isPrivateRoute = privateRoutes.includes(nextUrl.pathname);
   const isApiRoute = nextUrl.pathname.includes('/api');
