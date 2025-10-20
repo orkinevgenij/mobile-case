@@ -2,21 +2,21 @@ import NextAuth from 'next-auth';
 import { getToken } from 'next-auth/jwt';
 import authConfig from './auth.config';
 import { privateRoutes } from './routes';
-import { useSession } from 'next-auth/react';
 
 const { auth } = NextAuth(authConfig);
+
 export default auth(async (req) => {
   const token = await getToken({ req, secret: process.env.AUTH_SECRET });
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
+  console.log('isLoggedIn', isLoggedIn);
   const role = token?.role;
-  console.log('role', role);
   const NEXT_PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL!;
   const isPrivateRoute = privateRoutes.includes(nextUrl.pathname);
   const isApiRoute = nextUrl.pathname.includes('/api');
   const isAuthRoute = nextUrl.pathname.includes('/auth');
   const isAdminRoute = nextUrl.pathname.startsWith('/dashboard');
-
+  console.log('isAdminRoute', isAdminRoute);
   if (isApiRoute) {
     return;
   }
@@ -40,4 +40,5 @@ export default auth(async (req) => {
 
 export const config = {
   matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
+  runtime: 'nodejs',
 };
