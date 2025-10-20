@@ -22,7 +22,6 @@ export const {
   session: {
     strategy: 'jwt',
   },
-  secret: process.env.AUTH_SECRET,
   callbacks: {
     async signIn({ user, account }) {
       return true;
