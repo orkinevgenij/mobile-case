@@ -35,8 +35,8 @@ export default auth(async (req) => {
     return Response.redirect(`${NEXT_PUBLIC_BASE_URL}/auth/login`);
   }
 
-  if (isAdminRoute && token && role !== 'ADMIN') {
-    return Response.redirect(`${NEXT_PUBLIC_BASE_URL}`);
+  if (isAdminRoute) {
+    if (role !== 'ADMIN') return Response.redirect(`${NEXT_PUBLIC_BASE_URL}`);
   }
 });
 
