@@ -17,12 +17,12 @@ export const {
   signIn,
   signOut,
 } = NextAuth({
+  ...authConfig,
   adapter: PrismaAdapter(prisma),
   session: {
     strategy: 'jwt',
   },
   secret: process.env.AUTH_SECRET,
-  ...authConfig,
   callbacks: {
     async signIn({ user, account }) {
       return true;

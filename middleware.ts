@@ -7,10 +7,7 @@ const { auth } = NextAuth(authConfig);
 
 export default auth(async (req) => {
   const token = await getToken({ req, secret: process.env.AUTH_SECRET });
-  console.log('🧩 Token keys:', Object.keys(token || {}));
 
-  const secret = process.env.AUTH_SECRET;
-  console.log('🔑 AUTH_SECRET length:', secret);
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
   const role = token?.role;
@@ -19,8 +16,7 @@ export default auth(async (req) => {
   const isApiRoute = nextUrl.pathname.includes('/api');
   const isAuthRoute = nextUrl.pathname.includes('/auth');
   const isAdminRoute = nextUrl.pathname.startsWith('/dashboard');
-  console.log('🧭 isAdminRoute:', isAdminRoute, 'role:', token?.role);
-
+  console.log('isAdmin', isAdminRoute);
   if (isApiRoute) {
     return;
   }
