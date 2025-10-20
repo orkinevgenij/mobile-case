@@ -3,7 +3,6 @@ import NextAuth, { DefaultSession } from 'next-auth';
 import authConfig from './auth.config';
 import { prisma } from './lib/prisma';
 import { getUserByEmail } from './lib/user';
-
 declare module 'next-auth' {
   interface Session {
     user: {
@@ -12,7 +11,6 @@ declare module 'next-auth' {
     } & DefaultSession['user'];
   }
 }
-
 export const {
   handlers: { GET, POST },
   auth,
@@ -28,28 +26,15 @@ export const {
     async signIn({ user, account }) {
       return true;
     },
+    async jwt({ token }) {
+      if (!token.email) return token;
+      const user = await getUserByEmail(token.email);
+      if (!user) return token;
 
-    async jwt({ token, user }) {
-      // 🔹 1️⃣
-      if (user) {
-        const u = user as any;
-        token.email = u.email;
-        token.role = u.role;
-        token.userId = u.id;
-        return token;
-      }
-
-      if (token.email) {
-        const dbUser = await getUserByEmail(token.email);
-        if (dbUser) {
-          token.role = dbUser.role;
-          token.userId = dbUser.id;
-        }
-      }
-
+      token.role = user.role;
+      token.userId = user.id;
       return token;
     },
-
     async session({ token, session }) {
       if (token.role) {
         session.user.role = token.role as 'USER' | 'ADMIN';

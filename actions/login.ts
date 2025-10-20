@@ -1,5 +1,4 @@
 'use server';
-
 import { signIn } from '@/auth';
 import { prisma } from '@/lib/prisma';
 import { LoginSchema, LoginSchemaType } from '@/schemas/LoginSchema';

@@ -27,7 +27,7 @@ const NavBar = ({ brands, series, models }: TCategoryMenu) => {
           {!isLoggedIn && (
             <Link
               href={'/auth/login'}
-              className='hidden sm:flex md:flex xl:flex flex-col items-center text-green-500 hover:text-green-400'
+              className='flex-col items-center text-green-500 hover:text-green-400'
             >
               <LogIn size={25} />
               Увійти
