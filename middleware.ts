@@ -11,16 +11,17 @@ export default auth(async (req) => {
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
   const NEXT_PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL!;
-  const isPrivateRoute = privateRoutes.includes(nextUrl.pathname);
   const isApiRoute = nextUrl.pathname.includes('/api');
   const isAuthRoute = nextUrl.pathname.includes('/auth');
+  const isPrivateRoute = nextUrl.pathname.startsWith('/orders');
   const isAdminRoute = nextUrl.pathname.startsWith('/dashboard');
+
   if (isApiRoute) {
     return;
   }
 
   if (isLoggedIn && isAuthRoute) {
-    return Response.redirect(`${NEXT_PUBLIC_BASE_URL}/`);
+    return Response.redirect(`${NEXT_PUBLIC_BASE_URL}`);
   }
 
   if (isAuthRoute && !isLoggedIn) {
@@ -31,7 +32,7 @@ export default auth(async (req) => {
     return Response.redirect(`${NEXT_PUBLIC_BASE_URL}/auth/login`);
   }
 
-  if (isAdminRoute && token && role !== 'ADMIN') {
+  if (isAdminRoute && role !== 'ADMIN') {
     return Response.redirect(`${NEXT_PUBLIC_BASE_URL}`);
   }
 });
