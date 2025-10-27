@@ -1,0 +1,136 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  accounts      Account[]
+  role          UserRole  @default(USER)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  orders        Order[]
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+}
+
+model Brand {
+  id     String   @id @default(uuid())
+  name   String
+  series Series[]
+}
+
+model Series {
+  id   String @id @default(uuid())
+  name String
+
+  brand           Brand   @relation(fields: [brandId], references: [id])
+  brandId         String
+  modelSmartphone Model[]
+}
+
+model Model {
+  id       String @id @default(uuid())
+  name     String
+  series   Series @relation(fields: [seriesId], references: [id])
+  seriesId String
+  cases    Case[]
+}
+
+model Case {
+  id              String  @id @default(uuid())
+  guarantee       Int
+  material        String
+  description     String
+  name            String
+  modelSmartphone Model   @relation(fields: [modelId], references: [id], onDelete: Cascade)
+  modelId         String
+  slug            String? @unique
+  views           Int     @default(0)
+
+  caseVariations CaseVariation[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CaseVariation {
+  id String @id @default(uuid())
+
+  case   Case    @relation(fields: [caseId], references: [id])
+  caseId String
+  slug   String? @unique
+
+  price      Int
+  color      String
+  imgUrl     String?
+  orderId    String?
+  orderItems OrderItem[]
+}
+
+model Order {
+  id          String      @id @default(uuid())
+  items       OrderItem[]
+  number      BigInt      @unique
+  totalAmount Int
+
+  user      User        @relation(fields: [userId], references: [id])
+  userId    String
+  status    OrderStatus @default(PROCESSING)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+model OrderItem {
+  id       String @id @default(uuid())
+  quantity Int
+
+  order   Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId String
+
+  caseVariation   CaseVariation @relation(fields: [caseVariationId], references: [id])
+  caseVariationId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum UserRole {
+  ADMIN
+  USER
+}
+
+enum OrderStatus {
+  PROCESSING
+  DELIVERED
+  COMPLETED
+  CANCELLED
+}
