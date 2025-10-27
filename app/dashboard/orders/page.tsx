@@ -3,6 +3,8 @@ import OrderCard from '@/components/OrderCard';
 import OrdersEmpty from '@/components/OrdersEmpty';
 import SortFilter from '@/components/SortFilter';
 import Container from '@/components/Container';
+import { auth } from '@/auth';
+import { redirect } from 'next/navigation';
 
 export default async function Orders({
   searchParams,
@@ -11,6 +13,12 @@ export default async function Orders({
     filter: 'asc' | 'desc';
   }>;
 }) {
+    const session = await auth();
+    const user = session?.user.role;
+  
+    if (user !== 'ADMIN') {
+      redirect('/');
+    }
   const { filter } = await searchParams;
   const orders = await getOrders(filter);
 

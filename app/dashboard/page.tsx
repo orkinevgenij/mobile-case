@@ -5,6 +5,11 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
 export default async function DashboardPage() {
+  const session = await auth();
+  const user = session?.user.role;
+  if (user !== 'ADMIN') {
+    redirect('/');
+  }
   return (
     <Container>
       <div className='grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10'>
