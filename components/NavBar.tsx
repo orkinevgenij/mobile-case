@@ -42,10 +42,10 @@ const NavBar = ({ brands, series, models }: TCategoryMenu) => {
           <SearchInput />
           <Link
             href={'/cart'}
-            className='flex flex-col items-center text-green-500 hover:text-green-400'
+            className='flex flex-col relative items-center text-green-500 hover:text-green-400'
           >
-            <ShoppingBasket size={25} className='relative' />
-            <Badge className='absolute bg-green-400 right-4 h-4 min-w-4 rounded-full px-1 font-mono tabular-nums'>
+            <ShoppingBasket size={25} />
+            <Badge className='absolute bg-green-400 left-4 h-4 min-w-4 rounded-full px-1 font-mono tabular-nums'>
               {cartItems.length}
             </Badge>
             <span>Кошик</span>
